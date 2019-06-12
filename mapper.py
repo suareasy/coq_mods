@@ -1,57 +1,68 @@
 import csv
 from lxml.etree import *
 
-words = [
-    'wall',
-    'bridge',
-    'river',
-    'floor',
-    'door'
-]
-
-mappings = {word[0]: word for word in words}
-
-
-with open( 'Downloads/candy_kingdom.csv', newline='' ) as f:
+def tonone( s ):
     
-    data = list( csv.reader( f ))
+    if s.lower() == 'none':
+        return None
 
+    return s
 
-l = len( data[0] )
-w = len( data )
-
-root = Element( 'Map', {
-    'Width': str( w - 2 ),
-    'Length': str( l - 2 )
-})
-
-root.text = '\n\t'
-
-for y in range( 1, w - 1 ):
-
-    for x in range( 1, l - 1 ):
+def getmappings( mappingfile ):
+    with open( mappingfile, newline = '' ) as f:
         
-        celldata = data[y][x]
-
-        cellement = SubElement( root, 'cell', {
-            'X': str( x - 1 ),
-            'Y': str( y - 1 )
-        })
-
-        cellement.tail = '\n\t'
+        next( f )
+        rawmappings = list( csv.reader( f, delimiter = ',' ))
         
-        mapping = mappings.get( celldata )
-        
-        if mapping is not None:
-            
-            cellement.text = '\n\t\t'
-            
-            obj = SubElement( cellement, 'object', {'name': mapping} )
-            
-            obj.tail = '\n\t'
+    mappings = {x[0]:tonone( x[1] ) for x in rawmappings}
+    
+    return mappings
 
-root[-1].tail = '\n'
 
-print( tostring( root ).decode( 'utf-8' ))
+def main( imagefile, mappingfile ):
+
+    mappings = getmappings( mappingfile )
+
+    parser = HTMLParser()
+    tree = parse( imagefile, parser )
+    data = tree.getroot().find( './/table' )
+
+    w = len( data )
+    l = len( data[0] )
+
+    root = Element( 'Map', {
+        'Width': str( w ),
+        'Length': str( l )
+    })
+
+    root.text = '\n\t'
+
+    for y in range( w ):
+
+        for x in range( l ):
+            
+            celldata = data[y][x].attrib['bgcolor']
+
+            cellement = SubElement( root, 'cell', {
+                'X': str( x ),
+                'Y': str( y )
+            })
+
+            cellement.tail = '\n\t'
+            
+            mapping = mappings.get( celldata )
+            
+            if mapping is not None:
                 
+                cellement.text = '\n\t\t'
+                
+                obj = SubElement( cellement, 'object', {'name': mapping} )
+                obj.tail = '\n\t'
 
+    root[-1].tail = '\n'
+
+#    print( tostring( root ).decode( 'utf-8' ))
+    with open( output, 'w' ) as f:
+        f.write( tostring( root ).decode( 'utf-8' ))
+
+main( 'test.html', 'mappings.csv', 'test.rpm' )
