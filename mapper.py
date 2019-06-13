@@ -60,20 +60,20 @@ def main( imagefile, mappingfile, output ):
 
     # Assumed to be orriented like the CoQ 
     # map creater.
-    #   length = x-axis
-    #   width = y-axis
-    w = len( data )
-    l = len( data[0] )
+    #   width  = x-axis
+    #   height = y-axis
+    h = len( data )
+    w = len( data[0] )
 
     root = Element( 'Map', {
-        'height': str( w ),
-        'width': str( l )
+        'Height': str( h ),
+        'Width': str( w )
     })
     root.text = '\n\t'
 
-    for y in range( w ):
+    for y in range( h ):
 
-        for x in range( l ):
+        for x in range( w ):
             
             celldata = data[y][x].attrib['bgcolor']
 
