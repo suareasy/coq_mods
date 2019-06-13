@@ -1,4 +1,5 @@
-<Map Length="80" Width="25">
+<?xml version='1.0' encoding='UTF-8'?>
+<Map height="25" width="80">
 	<cell X="0" Y="0"/>
 	<cell X="1" Y="0"/>
 	<cell X="2" Y="0"/>
@@ -165,13 +166,27 @@
 	<cell X="3" Y="2"/>
 	<cell X="4" Y="2"/>
 	<cell X="5" Y="2"/>
-	<cell X="6" Y="2"/>
-	<cell X="7" Y="2"/>
-	<cell X="8" Y="2"/>
-	<cell X="9" Y="2"/>
-	<cell X="10" Y="2"/>
-	<cell X="11" Y="2"/>
-	<cell X="12" Y="2"/>
+	<cell X="6" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="7" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="8" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="9" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="10" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="11" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="12" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="2"/>
 	<cell X="14" Y="2"/>
 	<cell X="15" Y="2"/>
@@ -182,8 +197,12 @@
 	<cell X="20" Y="2"/>
 	<cell X="21" Y="2"/>
 	<cell X="22" Y="2"/>
-	<cell X="23" Y="2"/>
-	<cell X="24" Y="2"/>
+	<cell X="23" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="24" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="25" Y="2"/>
 	<cell X="26" Y="2"/>
 	<cell X="27" Y="2"/>
@@ -206,7 +225,9 @@
 	<cell X="44" Y="2"/>
 	<cell X="45" Y="2"/>
 	<cell X="46" Y="2"/>
-	<cell X="47" Y="2"/>
+	<cell X="47" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="48" Y="2"/>
 	<cell X="49" Y="2"/>
 	<cell X="50" Y="2"/>
@@ -221,19 +242,45 @@
 	<cell X="59" Y="2"/>
 	<cell X="60" Y="2"/>
 	<cell X="61" Y="2"/>
-	<cell X="62" Y="2"/>
-	<cell X="63" Y="2"/>
-	<cell X="64" Y="2"/>
-	<cell X="65" Y="2"/>
-	<cell X="66" Y="2"/>
-	<cell X="67" Y="2"/>
-	<cell X="68" Y="2"/>
-	<cell X="69" Y="2"/>
-	<cell X="70" Y="2"/>
-	<cell X="71" Y="2"/>
-	<cell X="72" Y="2"/>
-	<cell X="73" Y="2"/>
-	<cell X="74" Y="2"/>
+	<cell X="62" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="63" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="64" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="65" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="66" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="67" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="68" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="69" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="70" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="71" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="72" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="73" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="74" Y="2">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="75" Y="2"/>
 	<cell X="76" Y="2"/>
 	<cell X="77" Y="2"/>
@@ -245,13 +292,17 @@
 	<cell X="3" Y="3"/>
 	<cell X="4" Y="3"/>
 	<cell X="5" Y="3"/>
-	<cell X="6" Y="3"/>
+	<cell X="6" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="3"/>
 	<cell X="8" Y="3"/>
 	<cell X="9" Y="3"/>
 	<cell X="10" Y="3"/>
 	<cell X="11" Y="3"/>
-	<cell X="12" Y="3"/>
+	<cell X="12" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="3"/>
 	<cell X="14" Y="3"/>
 	<cell X="15" Y="3"/>
@@ -262,32 +313,72 @@
 	<cell X="20" Y="3"/>
 	<cell X="21" Y="3"/>
 	<cell X="22" Y="3"/>
-	<cell X="23" Y="3"/>
-	<cell X="24" Y="3"/>
-	<cell X="25" Y="3"/>
-	<cell X="26" Y="3"/>
-	<cell X="27" Y="3"/>
-	<cell X="28" Y="3"/>
-	<cell X="29" Y="3"/>
-	<cell X="30" Y="3"/>
-	<cell X="31" Y="3"/>
-	<cell X="32" Y="3"/>
+	<cell X="23" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="24" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="25" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="26" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="27" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="28" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="29" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="30" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="31" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="32" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="3"/>
 	<cell X="34" Y="3"/>
 	<cell X="35" Y="3"/>
 	<cell X="36" Y="3"/>
 	<cell X="37" Y="3"/>
 	<cell X="38" Y="3"/>
-	<cell X="39" Y="3"/>
-	<cell X="40" Y="3"/>
-	<cell X="41" Y="3"/>
-	<cell X="42" Y="3"/>
-	<cell X="43" Y="3"/>
-	<cell X="44" Y="3"/>
-	<cell X="45" Y="3"/>
-	<cell X="46" Y="3"/>
-	<cell X="47" Y="3"/>
-	<cell X="48" Y="3"/>
+	<cell X="39" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="41" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="42" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="43" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="44" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="45" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="46" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="47" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="48" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="49" Y="3"/>
 	<cell X="50" Y="3"/>
 	<cell X="51" Y="3"/>
@@ -301,7 +392,9 @@
 	<cell X="59" Y="3"/>
 	<cell X="60" Y="3"/>
 	<cell X="61" Y="3"/>
-	<cell X="62" Y="3"/>
+	<cell X="62" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="3"/>
 	<cell X="64" Y="3"/>
 	<cell X="65" Y="3"/>
@@ -313,8 +406,12 @@
 	<cell X="71" Y="3"/>
 	<cell X="72" Y="3"/>
 	<cell X="73" Y="3"/>
-	<cell X="74" Y="3"/>
-	<cell X="75" Y="3"/>
+	<cell X="74" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="75" Y="3">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="3"/>
 	<cell X="77" Y="3"/>
 	<cell X="78" Y="3"/>
@@ -323,42 +420,22 @@
 	<cell X="1" Y="4"/>
 	<cell X="2" Y="4"/>
 	<cell X="3" Y="4"/>
-	<cell X="4" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="5" Y="4">
-		<object name="wall"/>
-	</cell>
+	<cell X="4" Y="4"/>
+	<cell X="5" Y="4"/>
 	<cell X="6" Y="4">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="7" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="8" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="9" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="10" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="11" Y="4">
-		<object name="wall"/>
-	</cell>
+	<cell X="7" Y="4"/>
+	<cell X="8" Y="4"/>
+	<cell X="9" Y="4"/>
+	<cell X="10" Y="4"/>
+	<cell X="11" Y="4"/>
 	<cell X="12" Y="4">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="13" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="14" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="15" Y="4">
-		<object name="wall"/>
-	</cell>
+	<cell X="13" Y="4"/>
+	<cell X="14" Y="4"/>
+	<cell X="15" Y="4"/>
 	<cell X="16" Y="4"/>
 	<cell X="17" Y="4"/>
 	<cell X="18" Y="4"/>
@@ -366,7 +443,9 @@
 	<cell X="20" Y="4"/>
 	<cell X="21" Y="4"/>
 	<cell X="22" Y="4"/>
-	<cell X="23" Y="4"/>
+	<cell X="23" Y="4">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="24" Y="4"/>
 	<cell X="25" Y="4"/>
 	<cell X="26" Y="4"/>
@@ -375,21 +454,17 @@
 	<cell X="29" Y="4"/>
 	<cell X="30" Y="4"/>
 	<cell X="31" Y="4"/>
-	<cell X="32" Y="4"/>
+	<cell X="32" Y="4">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="4"/>
 	<cell X="34" Y="4"/>
 	<cell X="35" Y="4"/>
-	<cell X="36" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="37" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="38" Y="4">
-		<object name="wall"/>
-	</cell>
+	<cell X="36" Y="4"/>
+	<cell X="37" Y="4"/>
+	<cell X="38" Y="4"/>
 	<cell X="39" Y="4">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
 	<cell X="40" Y="4"/>
 	<cell X="41" Y="4"/>
@@ -398,44 +473,24 @@
 	<cell X="44" Y="4"/>
 	<cell X="45" Y="4"/>
 	<cell X="46" Y="4"/>
-	<cell X="47" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="48" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="49" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="50" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="51" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="52" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="53" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="54" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="55" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="56" Y="4">
-		<object name="wall"/>
-	</cell>
-	<cell X="57" Y="4">
-		<object name="wall"/>
-	</cell>
+	<cell X="47" Y="4"/>
+	<cell X="48" Y="4"/>
+	<cell X="49" Y="4"/>
+	<cell X="50" Y="4"/>
+	<cell X="51" Y="4"/>
+	<cell X="52" Y="4"/>
+	<cell X="53" Y="4"/>
+	<cell X="54" Y="4"/>
+	<cell X="55" Y="4"/>
+	<cell X="56" Y="4"/>
+	<cell X="57" Y="4"/>
 	<cell X="58" Y="4"/>
 	<cell X="59" Y="4"/>
 	<cell X="60" Y="4"/>
 	<cell X="61" Y="4"/>
-	<cell X="62" Y="4"/>
+	<cell X="62" Y="4">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="4"/>
 	<cell X="64" Y="4"/>
 	<cell X="65" Y="4"/>
@@ -448,7 +503,9 @@
 	<cell X="72" Y="4"/>
 	<cell X="73" Y="4"/>
 	<cell X="74" Y="4"/>
-	<cell X="75" Y="4"/>
+	<cell X="75" Y="4">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="4"/>
 	<cell X="77" Y="4"/>
 	<cell X="78" Y="4"/>
@@ -459,17 +516,17 @@
 	<cell X="3" Y="5"/>
 	<cell X="4" Y="5"/>
 	<cell X="5" Y="5"/>
-	<cell X="6" Y="5"/>
+	<cell X="6" Y="5">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="5"/>
-	<cell X="8" Y="5">
-		<object name="wall"/>
-	</cell>
-	<cell X="9" Y="5">
-		<object name="wall"/>
-	</cell>
+	<cell X="8" Y="5"/>
+	<cell X="9" Y="5"/>
 	<cell X="10" Y="5"/>
 	<cell X="11" Y="5"/>
-	<cell X="12" Y="5"/>
+	<cell X="12" Y="5">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="5"/>
 	<cell X="14" Y="5"/>
 	<cell X="15" Y="5"/>
@@ -481,36 +538,30 @@
 	<cell X="21" Y="5"/>
 	<cell X="22" Y="5"/>
 	<cell X="23" Y="5">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="24" Y="5">
-		<object name="wall"/>
-	</cell>
-	<cell X="25" Y="5">
-		<object name="wall"/>
-	</cell>
+	<cell X="24" Y="5"/>
+	<cell X="25" Y="5"/>
 	<cell X="26" Y="5"/>
 	<cell X="27" Y="5"/>
 	<cell X="28" Y="5"/>
 	<cell X="29" Y="5"/>
 	<cell X="30" Y="5"/>
 	<cell X="31" Y="5"/>
-	<cell X="32" Y="5"/>
+	<cell X="32" Y="5">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="5"/>
 	<cell X="34" Y="5"/>
-	<cell X="35" Y="5">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="5"/>
 	<cell X="36" Y="5"/>
 	<cell X="37" Y="5"/>
 	<cell X="38" Y="5"/>
-	<cell X="39" Y="5"/>
-	<cell X="40" Y="5">
-		<object name="wall"/>
+	<cell X="39" Y="5">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="41" Y="5">
-		<object name="wall"/>
-	</cell>
+	<cell X="40" Y="5"/>
+	<cell X="41" Y="5"/>
 	<cell X="42" Y="5"/>
 	<cell X="43" Y="5"/>
 	<cell X="44" Y="5"/>
@@ -520,9 +571,7 @@
 	<cell X="48" Y="5"/>
 	<cell X="49" Y="5"/>
 	<cell X="50" Y="5"/>
-	<cell X="51" Y="5">
-		<object name="wall"/>
-	</cell>
+	<cell X="51" Y="5"/>
 	<cell X="52" Y="5"/>
 	<cell X="53" Y="5"/>
 	<cell X="54" Y="5"/>
@@ -533,7 +582,9 @@
 	<cell X="59" Y="5"/>
 	<cell X="60" Y="5"/>
 	<cell X="61" Y="5"/>
-	<cell X="62" Y="5"/>
+	<cell X="62" Y="5">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="5"/>
 	<cell X="64" Y="5"/>
 	<cell X="65" Y="5"/>
@@ -546,7 +597,9 @@
 	<cell X="72" Y="5"/>
 	<cell X="73" Y="5"/>
 	<cell X="74" Y="5"/>
-	<cell X="75" Y="5"/>
+	<cell X="75" Y="5">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="5"/>
 	<cell X="77" Y="5"/>
 	<cell X="78" Y="5"/>
@@ -556,13 +609,15 @@
 	<cell X="2" Y="6"/>
 	<cell X="3" Y="6"/>
 	<cell X="4" Y="6"/>
-	<cell X="5" Y="6"/>
-	<cell X="6" Y="6"/>
+	<cell X="5" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="6" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="6"/>
 	<cell X="8" Y="6"/>
-	<cell X="9" Y="6">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="6"/>
 	<cell X="10" Y="6"/>
 	<cell X="11" Y="6"/>
 	<cell X="12" Y="6"/>
@@ -574,35 +629,31 @@
 	<cell X="18" Y="6"/>
 	<cell X="19" Y="6"/>
 	<cell X="20" Y="6"/>
-	<cell X="21" Y="6">
-		<object name="wall"/>
+	<cell X="21" Y="6"/>
+	<cell X="22" Y="6"/>
+	<cell X="23" Y="6">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="22" Y="6">
-		<object name="wall"/>
-	</cell>
-	<cell X="23" Y="6"/>
 	<cell X="24" Y="6"/>
-	<cell X="25" Y="6">
-		<object name="wall"/>
-	</cell>
-	<cell X="26" Y="6">
-		<object name="wall"/>
-	</cell>
+	<cell X="25" Y="6"/>
+	<cell X="26" Y="6"/>
 	<cell X="27" Y="6"/>
 	<cell X="28" Y="6"/>
 	<cell X="29" Y="6"/>
 	<cell X="30" Y="6"/>
 	<cell X="31" Y="6"/>
-	<cell X="32" Y="6"/>
+	<cell X="32" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="6"/>
 	<cell X="34" Y="6"/>
-	<cell X="35" Y="6">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="6"/>
 	<cell X="36" Y="6"/>
 	<cell X="37" Y="6"/>
 	<cell X="38" Y="6"/>
-	<cell X="39" Y="6"/>
+	<cell X="39" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="40" Y="6"/>
 	<cell X="41" Y="6"/>
 	<cell X="42" Y="6"/>
@@ -611,12 +662,12 @@
 	<cell X="45" Y="6"/>
 	<cell X="46" Y="6"/>
 	<cell X="47" Y="6"/>
-	<cell X="48" Y="6"/>
+	<cell X="48" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="49" Y="6"/>
 	<cell X="50" Y="6"/>
-	<cell X="51" Y="6">
-		<object name="wall"/>
-	</cell>
+	<cell X="51" Y="6"/>
 	<cell X="52" Y="6"/>
 	<cell X="53" Y="6"/>
 	<cell X="54" Y="6"/>
@@ -627,7 +678,9 @@
 	<cell X="59" Y="6"/>
 	<cell X="60" Y="6"/>
 	<cell X="61" Y="6"/>
-	<cell X="62" Y="6"/>
+	<cell X="62" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="6"/>
 	<cell X="64" Y="6"/>
 	<cell X="65" Y="6"/>
@@ -640,7 +693,9 @@
 	<cell X="72" Y="6"/>
 	<cell X="73" Y="6"/>
 	<cell X="74" Y="6"/>
-	<cell X="75" Y="6"/>
+	<cell X="75" Y="6">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="6"/>
 	<cell X="77" Y="6"/>
 	<cell X="78" Y="6"/>
@@ -650,16 +705,20 @@
 	<cell X="2" Y="7"/>
 	<cell X="3" Y="7"/>
 	<cell X="4" Y="7"/>
-	<cell X="5" Y="7"/>
-	<cell X="6" Y="7"/>
+	<cell X="5" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="6" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="7"/>
 	<cell X="8" Y="7"/>
-	<cell X="9" Y="7">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="7"/>
 	<cell X="10" Y="7"/>
 	<cell X="11" Y="7"/>
-	<cell X="12" Y="7"/>
+	<cell X="12" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="7"/>
 	<cell X="14" Y="7"/>
 	<cell X="15" Y="7"/>
@@ -668,11 +727,11 @@
 	<cell X="18" Y="7"/>
 	<cell X="19" Y="7"/>
 	<cell X="20" Y="7"/>
-	<cell X="21" Y="7">
-		<object name="wall"/>
-	</cell>
+	<cell X="21" Y="7"/>
 	<cell X="22" Y="7"/>
-	<cell X="23" Y="7"/>
+	<cell X="23" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="24" Y="7"/>
 	<cell X="25" Y="7"/>
 	<cell X="26" Y="7"/>
@@ -681,16 +740,18 @@
 	<cell X="29" Y="7"/>
 	<cell X="30" Y="7"/>
 	<cell X="31" Y="7"/>
-	<cell X="32" Y="7"/>
+	<cell X="32" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="7"/>
 	<cell X="34" Y="7"/>
-	<cell X="35" Y="7">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="7"/>
 	<cell X="36" Y="7"/>
 	<cell X="37" Y="7"/>
 	<cell X="38" Y="7"/>
-	<cell X="39" Y="7"/>
+	<cell X="39" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="40" Y="7"/>
 	<cell X="41" Y="7"/>
 	<cell X="42" Y="7"/>
@@ -699,12 +760,12 @@
 	<cell X="45" Y="7"/>
 	<cell X="46" Y="7"/>
 	<cell X="47" Y="7"/>
-	<cell X="48" Y="7"/>
+	<cell X="48" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="49" Y="7"/>
 	<cell X="50" Y="7"/>
-	<cell X="51" Y="7">
-		<object name="wall"/>
-	</cell>
+	<cell X="51" Y="7"/>
 	<cell X="52" Y="7"/>
 	<cell X="53" Y="7"/>
 	<cell X="54" Y="7"/>
@@ -715,7 +776,9 @@
 	<cell X="59" Y="7"/>
 	<cell X="60" Y="7"/>
 	<cell X="61" Y="7"/>
-	<cell X="62" Y="7"/>
+	<cell X="62" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="7"/>
 	<cell X="64" Y="7"/>
 	<cell X="65" Y="7"/>
@@ -728,7 +791,9 @@
 	<cell X="72" Y="7"/>
 	<cell X="73" Y="7"/>
 	<cell X="74" Y="7"/>
-	<cell X="75" Y="7"/>
+	<cell X="75" Y="7">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="7"/>
 	<cell X="77" Y="7"/>
 	<cell X="78" Y="7"/>
@@ -739,15 +804,27 @@
 	<cell X="3" Y="8"/>
 	<cell X="4" Y="8"/>
 	<cell X="5" Y="8"/>
-	<cell X="6" Y="8"/>
-	<cell X="7" Y="8"/>
-	<cell X="8" Y="8"/>
-	<cell X="9" Y="8">
-		<object name="wall"/>
+	<cell X="6" Y="8">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="10" Y="8"/>
-	<cell X="11" Y="8"/>
-	<cell X="12" Y="8"/>
+	<cell X="7" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="8" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="9" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="10" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="11" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="12" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="8"/>
 	<cell X="14" Y="8"/>
 	<cell X="15" Y="8"/>
@@ -756,31 +833,45 @@
 	<cell X="18" Y="8"/>
 	<cell X="19" Y="8"/>
 	<cell X="20" Y="8"/>
-	<cell X="21" Y="8">
-		<object name="wall"/>
+	<cell X="21" Y="8"/>
+	<cell X="22" Y="8"/>
+	<cell X="23" Y="8">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="22" Y="8">
-		<object name="wall"/>
-	</cell>
-	<cell X="23" Y="8"/>
 	<cell X="24" Y="8"/>
-	<cell X="25" Y="8"/>
-	<cell X="26" Y="8"/>
-	<cell X="27" Y="8"/>
-	<cell X="28" Y="8"/>
-	<cell X="29" Y="8"/>
-	<cell X="30" Y="8"/>
-	<cell X="31" Y="8"/>
-	<cell X="32" Y="8"/>
+	<cell X="25" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="26" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="27" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="28" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="29" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="30" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="31" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="32" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="8"/>
 	<cell X="34" Y="8"/>
-	<cell X="35" Y="8">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="8"/>
 	<cell X="36" Y="8"/>
 	<cell X="37" Y="8"/>
 	<cell X="38" Y="8"/>
-	<cell X="39" Y="8"/>
+	<cell X="39" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="40" Y="8"/>
 	<cell X="41" Y="8"/>
 	<cell X="42" Y="8"/>
@@ -789,12 +880,12 @@
 	<cell X="45" Y="8"/>
 	<cell X="46" Y="8"/>
 	<cell X="47" Y="8"/>
-	<cell X="48" Y="8"/>
+	<cell X="48" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="49" Y="8"/>
 	<cell X="50" Y="8"/>
-	<cell X="51" Y="8">
-		<object name="wall"/>
-	</cell>
+	<cell X="51" Y="8"/>
 	<cell X="52" Y="8"/>
 	<cell X="53" Y="8"/>
 	<cell X="54" Y="8"/>
@@ -805,7 +896,9 @@
 	<cell X="59" Y="8"/>
 	<cell X="60" Y="8"/>
 	<cell X="61" Y="8"/>
-	<cell X="62" Y="8"/>
+	<cell X="62" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="8"/>
 	<cell X="64" Y="8"/>
 	<cell X="65" Y="8"/>
@@ -818,7 +911,9 @@
 	<cell X="72" Y="8"/>
 	<cell X="73" Y="8"/>
 	<cell X="74" Y="8"/>
-	<cell X="75" Y="8"/>
+	<cell X="75" Y="8">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="8"/>
 	<cell X="77" Y="8"/>
 	<cell X="78" Y="8"/>
@@ -832,9 +927,7 @@
 	<cell X="6" Y="9"/>
 	<cell X="7" Y="9"/>
 	<cell X="8" Y="9"/>
-	<cell X="9" Y="9">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="9"/>
 	<cell X="10" Y="9"/>
 	<cell X="11" Y="9"/>
 	<cell X="12" Y="9"/>
@@ -847,9 +940,7 @@
 	<cell X="19" Y="9"/>
 	<cell X="20" Y="9"/>
 	<cell X="21" Y="9"/>
-	<cell X="22" Y="9">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="9"/>
 	<cell X="23" Y="9"/>
 	<cell X="24" Y="9"/>
 	<cell X="25" Y="9"/>
@@ -862,28 +953,44 @@
 	<cell X="32" Y="9"/>
 	<cell X="33" Y="9"/>
 	<cell X="34" Y="9"/>
-	<cell X="35" Y="9">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="9"/>
 	<cell X="36" Y="9"/>
 	<cell X="37" Y="9"/>
 	<cell X="38" Y="9"/>
-	<cell X="39" Y="9"/>
-	<cell X="40" Y="9"/>
-	<cell X="41" Y="9"/>
-	<cell X="42" Y="9"/>
-	<cell X="43" Y="9"/>
-	<cell X="44" Y="9"/>
-	<cell X="45" Y="9"/>
-	<cell X="46" Y="9"/>
-	<cell X="47" Y="9"/>
-	<cell X="48" Y="9"/>
+	<cell X="39" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="41" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="42" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="43" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="44" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="45" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="46" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="47" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="48" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="49" Y="9"/>
 	<cell X="50" Y="9"/>
 	<cell X="51" Y="9"/>
-	<cell X="52" Y="9">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="9"/>
 	<cell X="53" Y="9"/>
 	<cell X="54" Y="9"/>
 	<cell X="55" Y="9"/>
@@ -893,7 +1000,9 @@
 	<cell X="59" Y="9"/>
 	<cell X="60" Y="9"/>
 	<cell X="61" Y="9"/>
-	<cell X="62" Y="9"/>
+	<cell X="62" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="9"/>
 	<cell X="64" Y="9"/>
 	<cell X="65" Y="9"/>
@@ -906,7 +1015,9 @@
 	<cell X="72" Y="9"/>
 	<cell X="73" Y="9"/>
 	<cell X="74" Y="9"/>
-	<cell X="75" Y="9"/>
+	<cell X="75" Y="9">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="9"/>
 	<cell X="77" Y="9"/>
 	<cell X="78" Y="9"/>
@@ -920,9 +1031,7 @@
 	<cell X="6" Y="10"/>
 	<cell X="7" Y="10"/>
 	<cell X="8" Y="10"/>
-	<cell X="9" Y="10">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="10"/>
 	<cell X="10" Y="10"/>
 	<cell X="11" Y="10"/>
 	<cell X="12" Y="10"/>
@@ -935,9 +1044,7 @@
 	<cell X="19" Y="10"/>
 	<cell X="20" Y="10"/>
 	<cell X="21" Y="10"/>
-	<cell X="22" Y="10">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="10"/>
 	<cell X="23" Y="10"/>
 	<cell X="24" Y="10"/>
 	<cell X="25" Y="10"/>
@@ -950,9 +1057,7 @@
 	<cell X="32" Y="10"/>
 	<cell X="33" Y="10"/>
 	<cell X="34" Y="10"/>
-	<cell X="35" Y="10">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="10"/>
 	<cell X="36" Y="10"/>
 	<cell X="37" Y="10"/>
 	<cell X="38" Y="10"/>
@@ -969,9 +1074,7 @@
 	<cell X="49" Y="10"/>
 	<cell X="50" Y="10"/>
 	<cell X="51" Y="10"/>
-	<cell X="52" Y="10">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="10"/>
 	<cell X="53" Y="10"/>
 	<cell X="54" Y="10"/>
 	<cell X="55" Y="10"/>
@@ -981,7 +1084,9 @@
 	<cell X="59" Y="10"/>
 	<cell X="60" Y="10"/>
 	<cell X="61" Y="10"/>
-	<cell X="62" Y="10"/>
+	<cell X="62" Y="10">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="10"/>
 	<cell X="64" Y="10"/>
 	<cell X="65" Y="10"/>
@@ -994,7 +1099,9 @@
 	<cell X="72" Y="10"/>
 	<cell X="73" Y="10"/>
 	<cell X="74" Y="10"/>
-	<cell X="75" Y="10"/>
+	<cell X="75" Y="10">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="10"/>
 	<cell X="77" Y="10"/>
 	<cell X="78" Y="10"/>
@@ -1008,9 +1115,7 @@
 	<cell X="6" Y="11"/>
 	<cell X="7" Y="11"/>
 	<cell X="8" Y="11"/>
-	<cell X="9" Y="11">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="11"/>
 	<cell X="10" Y="11"/>
 	<cell X="11" Y="11"/>
 	<cell X="12" Y="11"/>
@@ -1023,21 +1128,11 @@
 	<cell X="19" Y="11"/>
 	<cell X="20" Y="11"/>
 	<cell X="21" Y="11"/>
-	<cell X="22" Y="11">
-		<object name="wall"/>
-	</cell>
-	<cell X="23" Y="11">
-		<object name="wall"/>
-	</cell>
-	<cell X="24" Y="11">
-		<object name="wall"/>
-	</cell>
-	<cell X="25" Y="11">
-		<object name="wall"/>
-	</cell>
-	<cell X="26" Y="11">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="11"/>
+	<cell X="23" Y="11"/>
+	<cell X="24" Y="11"/>
+	<cell X="25" Y="11"/>
+	<cell X="26" Y="11"/>
 	<cell X="27" Y="11"/>
 	<cell X="28" Y="11"/>
 	<cell X="29" Y="11"/>
@@ -1046,14 +1141,16 @@
 	<cell X="32" Y="11"/>
 	<cell X="33" Y="11"/>
 	<cell X="34" Y="11"/>
-	<cell X="35" Y="11">
-		<object name="wall"/>
-	</cell>
+	<cell X="35" Y="11"/>
 	<cell X="36" Y="11"/>
 	<cell X="37" Y="11"/>
 	<cell X="38" Y="11"/>
-	<cell X="39" Y="11"/>
-	<cell X="40" Y="11"/>
+	<cell X="39" Y="11">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="11">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="41" Y="11"/>
 	<cell X="42" Y="11"/>
 	<cell X="43" Y="11"/>
@@ -1065,9 +1162,7 @@
 	<cell X="49" Y="11"/>
 	<cell X="50" Y="11"/>
 	<cell X="51" Y="11"/>
-	<cell X="52" Y="11">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="11"/>
 	<cell X="53" Y="11"/>
 	<cell X="54" Y="11"/>
 	<cell X="55" Y="11"/>
@@ -1077,7 +1172,9 @@
 	<cell X="59" Y="11"/>
 	<cell X="60" Y="11"/>
 	<cell X="61" Y="11"/>
-	<cell X="62" Y="11"/>
+	<cell X="62" Y="11">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="11"/>
 	<cell X="64" Y="11"/>
 	<cell X="65" Y="11"/>
@@ -1090,7 +1187,9 @@
 	<cell X="72" Y="11"/>
 	<cell X="73" Y="11"/>
 	<cell X="74" Y="11"/>
-	<cell X="75" Y="11"/>
+	<cell X="75" Y="11">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="11"/>
 	<cell X="77" Y="11"/>
 	<cell X="78" Y="11"/>
@@ -1101,15 +1200,27 @@
 	<cell X="3" Y="12"/>
 	<cell X="4" Y="12"/>
 	<cell X="5" Y="12"/>
-	<cell X="6" Y="12"/>
-	<cell X="7" Y="12"/>
-	<cell X="8" Y="12"/>
-	<cell X="9" Y="12">
-		<object name="wall"/>
+	<cell X="6" Y="12">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="10" Y="12"/>
-	<cell X="11" Y="12"/>
-	<cell X="12" Y="12"/>
+	<cell X="7" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="8" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="9" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="10" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="11" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="12" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="12"/>
 	<cell X="14" Y="12"/>
 	<cell X="15" Y="12"/>
@@ -1119,45 +1230,91 @@
 	<cell X="19" Y="12"/>
 	<cell X="20" Y="12"/>
 	<cell X="21" Y="12"/>
-	<cell X="22" Y="12">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="12"/>
 	<cell X="23" Y="12"/>
-	<cell X="24" Y="12"/>
-	<cell X="25" Y="12"/>
-	<cell X="26" Y="12"/>
-	<cell X="27" Y="12"/>
-	<cell X="28" Y="12"/>
-	<cell X="29" Y="12"/>
-	<cell X="30" Y="12"/>
-	<cell X="31" Y="12"/>
-	<cell X="32" Y="12"/>
+	<cell X="24" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="25" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="26" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="27" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="28" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="29" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="30" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="31" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="32" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="12"/>
 	<cell X="34" Y="12"/>
 	<cell X="35" Y="12"/>
-	<cell X="36" Y="12">
-		<object name="wall"/>
-	</cell>
+	<cell X="36" Y="12"/>
 	<cell X="37" Y="12"/>
-	<cell X="38" Y="12"/>
-	<cell X="39" Y="12"/>
-	<cell X="40" Y="12"/>
-	<cell X="41" Y="12"/>
-	<cell X="42" Y="12"/>
-	<cell X="43" Y="12"/>
-	<cell X="44" Y="12"/>
-	<cell X="45" Y="12"/>
-	<cell X="46" Y="12"/>
-	<cell X="47" Y="12"/>
-	<cell X="48" Y="12"/>
-	<cell X="49" Y="12"/>
-	<cell X="50" Y="12"/>
-	<cell X="51" Y="12"/>
-	<cell X="52" Y="12">
-		<object name="wall"/>
+	<cell X="38" Y="12">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="53" Y="12"/>
-	<cell X="54" Y="12"/>
+	<cell X="39" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="41" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="42" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="43" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="44" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="45" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="46" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="47" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="48" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="49" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="50" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="51" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="52" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="53" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="54" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="12"/>
 	<cell X="56" Y="12"/>
 	<cell X="57" Y="12"/>
@@ -1165,7 +1322,9 @@
 	<cell X="59" Y="12"/>
 	<cell X="60" Y="12"/>
 	<cell X="61" Y="12"/>
-	<cell X="62" Y="12"/>
+	<cell X="62" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="12"/>
 	<cell X="64" Y="12"/>
 	<cell X="65" Y="12"/>
@@ -1178,7 +1337,9 @@
 	<cell X="72" Y="12"/>
 	<cell X="73" Y="12"/>
 	<cell X="74" Y="12"/>
-	<cell X="75" Y="12"/>
+	<cell X="75" Y="12">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="12"/>
 	<cell X="77" Y="12"/>
 	<cell X="78" Y="12"/>
@@ -1189,15 +1350,17 @@
 	<cell X="3" Y="13"/>
 	<cell X="4" Y="13"/>
 	<cell X="5" Y="13"/>
-	<cell X="6" Y="13"/>
+	<cell X="6" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="13"/>
 	<cell X="8" Y="13"/>
-	<cell X="9" Y="13">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="13"/>
 	<cell X="10" Y="13"/>
 	<cell X="11" Y="13"/>
-	<cell X="12" Y="13"/>
+	<cell X="12" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="13"/>
 	<cell X="14" Y="13"/>
 	<cell X="15" Y="13"/>
@@ -1207,11 +1370,11 @@
 	<cell X="19" Y="13"/>
 	<cell X="20" Y="13"/>
 	<cell X="21" Y="13"/>
-	<cell X="22" Y="13">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="13"/>
 	<cell X="23" Y="13"/>
-	<cell X="24" Y="13"/>
+	<cell X="24" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="25" Y="13"/>
 	<cell X="26" Y="13"/>
 	<cell X="27" Y="13"/>
@@ -1219,16 +1382,16 @@
 	<cell X="29" Y="13"/>
 	<cell X="30" Y="13"/>
 	<cell X="31" Y="13"/>
-	<cell X="32" Y="13"/>
+	<cell X="32" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="13"/>
 	<cell X="34" Y="13"/>
 	<cell X="35" Y="13"/>
 	<cell X="36" Y="13"/>
-	<cell X="37" Y="13">
-		<object name="wall"/>
-	</cell>
+	<cell X="37" Y="13"/>
 	<cell X="38" Y="13">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
 	<cell X="39" Y="13"/>
 	<cell X="40" Y="13"/>
@@ -1243,11 +1406,11 @@
 	<cell X="49" Y="13"/>
 	<cell X="50" Y="13"/>
 	<cell X="51" Y="13"/>
-	<cell X="52" Y="13">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="13"/>
 	<cell X="53" Y="13"/>
-	<cell X="54" Y="13"/>
+	<cell X="54" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="13"/>
 	<cell X="56" Y="13"/>
 	<cell X="57" Y="13"/>
@@ -1255,7 +1418,9 @@
 	<cell X="59" Y="13"/>
 	<cell X="60" Y="13"/>
 	<cell X="61" Y="13"/>
-	<cell X="62" Y="13"/>
+	<cell X="62" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="13"/>
 	<cell X="64" Y="13"/>
 	<cell X="65" Y="13"/>
@@ -1268,7 +1433,9 @@
 	<cell X="72" Y="13"/>
 	<cell X="73" Y="13"/>
 	<cell X="74" Y="13"/>
-	<cell X="75" Y="13"/>
+	<cell X="75" Y="13">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="13"/>
 	<cell X="77" Y="13"/>
 	<cell X="78" Y="13"/>
@@ -1279,15 +1446,17 @@
 	<cell X="3" Y="14"/>
 	<cell X="4" Y="14"/>
 	<cell X="5" Y="14"/>
-	<cell X="6" Y="14"/>
+	<cell X="6" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="14"/>
 	<cell X="8" Y="14"/>
-	<cell X="9" Y="14">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="14"/>
 	<cell X="10" Y="14"/>
 	<cell X="11" Y="14"/>
-	<cell X="12" Y="14"/>
+	<cell X="12" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="14"/>
 	<cell X="14" Y="14"/>
 	<cell X="15" Y="14"/>
@@ -1297,38 +1466,30 @@
 	<cell X="19" Y="14"/>
 	<cell X="20" Y="14"/>
 	<cell X="21" Y="14"/>
-	<cell X="22" Y="14">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="14"/>
 	<cell X="23" Y="14"/>
 	<cell X="24" Y="14">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="25" Y="14">
-		<object name="wall"/>
-	</cell>
-	<cell X="26" Y="14">
-		<object name="wall"/>
-	</cell>
-	<cell X="27" Y="14">
-		<object name="wall"/>
-	</cell>
-	<cell X="28" Y="14">
-		<object name="wall"/>
-	</cell>
+	<cell X="25" Y="14"/>
+	<cell X="26" Y="14"/>
+	<cell X="27" Y="14"/>
+	<cell X="28" Y="14"/>
 	<cell X="29" Y="14"/>
 	<cell X="30" Y="14"/>
 	<cell X="31" Y="14"/>
-	<cell X="32" Y="14"/>
+	<cell X="32" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="14"/>
 	<cell X="34" Y="14"/>
 	<cell X="35" Y="14"/>
 	<cell X="36" Y="14"/>
 	<cell X="37" Y="14"/>
-	<cell X="38" Y="14"/>
-	<cell X="39" Y="14">
-		<object name="wall"/>
+	<cell X="38" Y="14">
+		<object Name="WoodWall"/>
 	</cell>
+	<cell X="39" Y="14"/>
 	<cell X="40" Y="14"/>
 	<cell X="41" Y="14"/>
 	<cell X="42" Y="14"/>
@@ -1341,11 +1502,11 @@
 	<cell X="49" Y="14"/>
 	<cell X="50" Y="14"/>
 	<cell X="51" Y="14"/>
-	<cell X="52" Y="14">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="14"/>
 	<cell X="53" Y="14"/>
-	<cell X="54" Y="14"/>
+	<cell X="54" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="14"/>
 	<cell X="56" Y="14"/>
 	<cell X="57" Y="14"/>
@@ -1353,7 +1514,9 @@
 	<cell X="59" Y="14"/>
 	<cell X="60" Y="14"/>
 	<cell X="61" Y="14"/>
-	<cell X="62" Y="14"/>
+	<cell X="62" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="14"/>
 	<cell X="64" Y="14"/>
 	<cell X="65" Y="14"/>
@@ -1366,7 +1529,9 @@
 	<cell X="72" Y="14"/>
 	<cell X="73" Y="14"/>
 	<cell X="74" Y="14"/>
-	<cell X="75" Y="14"/>
+	<cell X="75" Y="14">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="14"/>
 	<cell X="77" Y="14"/>
 	<cell X="78" Y="14"/>
@@ -1377,12 +1542,12 @@
 	<cell X="3" Y="15"/>
 	<cell X="4" Y="15"/>
 	<cell X="5" Y="15"/>
-	<cell X="6" Y="15"/>
+	<cell X="6" Y="15">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="15"/>
 	<cell X="8" Y="15"/>
-	<cell X="9" Y="15">
-		<object name="wall"/>
-	</cell>
+	<cell X="9" Y="15"/>
 	<cell X="10" Y="15"/>
 	<cell X="11" Y="15"/>
 	<cell X="12" Y="15"/>
@@ -1395,14 +1560,10 @@
 	<cell X="19" Y="15"/>
 	<cell X="20" Y="15"/>
 	<cell X="21" Y="15"/>
-	<cell X="22" Y="15">
-		<object name="wall"/>
-	</cell>
-	<cell X="23" Y="15">
-		<object name="wall"/>
-	</cell>
+	<cell X="22" Y="15"/>
+	<cell X="23" Y="15"/>
 	<cell X="24" Y="15">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
 	<cell X="25" Y="15"/>
 	<cell X="26" Y="15"/>
@@ -1411,18 +1572,18 @@
 	<cell X="29" Y="15"/>
 	<cell X="30" Y="15"/>
 	<cell X="31" Y="15"/>
-	<cell X="32" Y="15"/>
-	<cell X="33" Y="15">
-		<object name="wall"/>
+	<cell X="32" Y="15">
+		<object Name="WoodWall"/>
 	</cell>
+	<cell X="33" Y="15"/>
 	<cell X="34" Y="15"/>
 	<cell X="35" Y="15"/>
 	<cell X="36" Y="15"/>
 	<cell X="37" Y="15"/>
-	<cell X="38" Y="15"/>
-	<cell X="39" Y="15">
-		<object name="wall"/>
+	<cell X="38" Y="15">
+		<object Name="WoodWall"/>
 	</cell>
+	<cell X="39" Y="15"/>
 	<cell X="40" Y="15"/>
 	<cell X="41" Y="15"/>
 	<cell X="42" Y="15"/>
@@ -1435,11 +1596,11 @@
 	<cell X="49" Y="15"/>
 	<cell X="50" Y="15"/>
 	<cell X="51" Y="15"/>
-	<cell X="52" Y="15">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="15"/>
 	<cell X="53" Y="15"/>
-	<cell X="54" Y="15"/>
+	<cell X="54" Y="15">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="15"/>
 	<cell X="56" Y="15"/>
 	<cell X="57" Y="15"/>
@@ -1447,7 +1608,9 @@
 	<cell X="59" Y="15"/>
 	<cell X="60" Y="15"/>
 	<cell X="61" Y="15"/>
-	<cell X="62" Y="15"/>
+	<cell X="62" Y="15">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="15"/>
 	<cell X="64" Y="15"/>
 	<cell X="65" Y="15"/>
@@ -1460,7 +1623,9 @@
 	<cell X="72" Y="15"/>
 	<cell X="73" Y="15"/>
 	<cell X="74" Y="15"/>
-	<cell X="75" Y="15"/>
+	<cell X="75" Y="15">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="15"/>
 	<cell X="77" Y="15"/>
 	<cell X="78" Y="15"/>
@@ -1471,7 +1636,9 @@
 	<cell X="3" Y="16"/>
 	<cell X="4" Y="16"/>
 	<cell X="5" Y="16"/>
-	<cell X="6" Y="16"/>
+	<cell X="6" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="16"/>
 	<cell X="8" Y="16"/>
 	<cell X="9" Y="16"/>
@@ -1489,7 +1656,9 @@
 	<cell X="21" Y="16"/>
 	<cell X="22" Y="16"/>
 	<cell X="23" Y="16"/>
-	<cell X="24" Y="16"/>
+	<cell X="24" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="25" Y="16"/>
 	<cell X="26" Y="16"/>
 	<cell X="27" Y="16"/>
@@ -1497,24 +1666,18 @@
 	<cell X="29" Y="16"/>
 	<cell X="30" Y="16"/>
 	<cell X="31" Y="16"/>
-	<cell X="32" Y="16"/>
+	<cell X="32" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="16"/>
-	<cell X="34" Y="16">
-		<object name="wall"/>
-	</cell>
-	<cell X="35" Y="16">
-		<object name="wall"/>
-	</cell>
-	<cell X="36" Y="16">
-		<object name="wall"/>
-	</cell>
+	<cell X="34" Y="16"/>
+	<cell X="35" Y="16"/>
+	<cell X="36" Y="16"/>
 	<cell X="37" Y="16"/>
 	<cell X="38" Y="16">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="39" Y="16">
-		<object name="wall"/>
-	</cell>
+	<cell X="39" Y="16"/>
 	<cell X="40" Y="16"/>
 	<cell X="41" Y="16"/>
 	<cell X="42" Y="16"/>
@@ -1527,11 +1690,11 @@
 	<cell X="49" Y="16"/>
 	<cell X="50" Y="16"/>
 	<cell X="51" Y="16"/>
-	<cell X="52" Y="16">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="16"/>
 	<cell X="53" Y="16"/>
-	<cell X="54" Y="16"/>
+	<cell X="54" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="16"/>
 	<cell X="56" Y="16"/>
 	<cell X="57" Y="16"/>
@@ -1539,7 +1702,9 @@
 	<cell X="59" Y="16"/>
 	<cell X="60" Y="16"/>
 	<cell X="61" Y="16"/>
-	<cell X="62" Y="16"/>
+	<cell X="62" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="63" Y="16"/>
 	<cell X="64" Y="16"/>
 	<cell X="65" Y="16"/>
@@ -1552,7 +1717,9 @@
 	<cell X="72" Y="16"/>
 	<cell X="73" Y="16"/>
 	<cell X="74" Y="16"/>
-	<cell X="75" Y="16"/>
+	<cell X="75" Y="16">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="16"/>
 	<cell X="77" Y="16"/>
 	<cell X="78" Y="16"/>
@@ -1563,13 +1730,17 @@
 	<cell X="3" Y="17"/>
 	<cell X="4" Y="17"/>
 	<cell X="5" Y="17"/>
-	<cell X="6" Y="17"/>
+	<cell X="6" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="17"/>
 	<cell X="8" Y="17"/>
 	<cell X="9" Y="17"/>
 	<cell X="10" Y="17"/>
 	<cell X="11" Y="17"/>
-	<cell X="12" Y="17"/>
+	<cell X="12" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="17"/>
 	<cell X="14" Y="17"/>
 	<cell X="15" Y="17"/>
@@ -1581,24 +1752,38 @@
 	<cell X="21" Y="17"/>
 	<cell X="22" Y="17"/>
 	<cell X="23" Y="17"/>
-	<cell X="24" Y="17"/>
+	<cell X="24" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="25" Y="17"/>
-	<cell X="26" Y="17"/>
-	<cell X="27" Y="17"/>
-	<cell X="28" Y="17"/>
-	<cell X="29" Y="17"/>
-	<cell X="30" Y="17"/>
-	<cell X="31" Y="17"/>
-	<cell X="32" Y="17"/>
+	<cell X="26" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="27" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="28" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="29" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="30" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="31" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="32" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="17"/>
 	<cell X="34" Y="17"/>
 	<cell X="35" Y="17"/>
 	<cell X="36" Y="17"/>
-	<cell X="37" Y="17">
-		<object name="wall"/>
-	</cell>
+	<cell X="37" Y="17"/>
 	<cell X="38" Y="17">
-		<object name="wall"/>
+		<object Name="WoodWall"/>
 	</cell>
 	<cell X="39" Y="17"/>
 	<cell X="40" Y="17"/>
@@ -1613,11 +1798,11 @@
 	<cell X="49" Y="17"/>
 	<cell X="50" Y="17"/>
 	<cell X="51" Y="17"/>
-	<cell X="52" Y="17">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="17"/>
 	<cell X="53" Y="17"/>
-	<cell X="54" Y="17"/>
+	<cell X="54" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="17"/>
 	<cell X="56" Y="17"/>
 	<cell X="57" Y="17"/>
@@ -1637,8 +1822,12 @@
 	<cell X="71" Y="17"/>
 	<cell X="72" Y="17"/>
 	<cell X="73" Y="17"/>
-	<cell X="74" Y="17"/>
-	<cell X="75" Y="17"/>
+	<cell X="74" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="75" Y="17">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="76" Y="17"/>
 	<cell X="77" Y="17"/>
 	<cell X="78" Y="17"/>
@@ -1649,13 +1838,17 @@
 	<cell X="3" Y="18"/>
 	<cell X="4" Y="18"/>
 	<cell X="5" Y="18"/>
-	<cell X="6" Y="18"/>
+	<cell X="6" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="18"/>
 	<cell X="8" Y="18"/>
 	<cell X="9" Y="18"/>
 	<cell X="10" Y="18"/>
 	<cell X="11" Y="18"/>
-	<cell X="12" Y="18"/>
+	<cell X="12" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="18"/>
 	<cell X="14" Y="18"/>
 	<cell X="15" Y="18"/>
@@ -1674,17 +1867,29 @@
 	<cell X="28" Y="18"/>
 	<cell X="29" Y="18"/>
 	<cell X="30" Y="18"/>
-	<cell X="31" Y="18"/>
-	<cell X="32" Y="18"/>
+	<cell X="31" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="32" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="33" Y="18"/>
 	<cell X="34" Y="18"/>
 	<cell X="35" Y="18"/>
 	<cell X="36" Y="18"/>
 	<cell X="37" Y="18"/>
-	<cell X="38" Y="18"/>
-	<cell X="39" Y="18"/>
-	<cell X="40" Y="18"/>
-	<cell X="41" Y="18"/>
+	<cell X="38" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="39" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="41" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="42" Y="18"/>
 	<cell X="43" Y="18"/>
 	<cell X="44" Y="18"/>
@@ -1695,9 +1900,7 @@
 	<cell X="49" Y="18"/>
 	<cell X="50" Y="18"/>
 	<cell X="51" Y="18"/>
-	<cell X="52" Y="18">
-		<object name="wall"/>
-	</cell>
+	<cell X="52" Y="18"/>
 	<cell X="53" Y="18"/>
 	<cell X="54" Y="18"/>
 	<cell X="55" Y="18"/>
@@ -1711,15 +1914,33 @@
 	<cell X="63" Y="18"/>
 	<cell X="64" Y="18"/>
 	<cell X="65" Y="18"/>
-	<cell X="66" Y="18"/>
-	<cell X="67" Y="18"/>
-	<cell X="68" Y="18"/>
-	<cell X="69" Y="18"/>
-	<cell X="70" Y="18"/>
-	<cell X="71" Y="18"/>
-	<cell X="72" Y="18"/>
-	<cell X="73" Y="18"/>
-	<cell X="74" Y="18"/>
+	<cell X="66" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="67" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="68" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="69" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="70" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="71" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="72" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="73" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="74" Y="18">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="75" Y="18"/>
 	<cell X="76" Y="18"/>
 	<cell X="77" Y="18"/>
@@ -1731,13 +1952,17 @@
 	<cell X="3" Y="19"/>
 	<cell X="4" Y="19"/>
 	<cell X="5" Y="19"/>
-	<cell X="6" Y="19"/>
+	<cell X="6" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="19"/>
 	<cell X="8" Y="19"/>
 	<cell X="9" Y="19"/>
 	<cell X="10" Y="19"/>
 	<cell X="11" Y="19"/>
-	<cell X="12" Y="19"/>
+	<cell X="12" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="19"/>
 	<cell X="14" Y="19"/>
 	<cell X="15" Y="19"/>
@@ -1763,25 +1988,57 @@
 	<cell X="35" Y="19"/>
 	<cell X="36" Y="19"/>
 	<cell X="37" Y="19"/>
-	<cell X="38" Y="19"/>
-	<cell X="39" Y="19"/>
-	<cell X="40" Y="19"/>
-	<cell X="41" Y="19"/>
-	<cell X="42" Y="19"/>
-	<cell X="43" Y="19"/>
-	<cell X="44" Y="19"/>
-	<cell X="45" Y="19"/>
-	<cell X="46" Y="19"/>
-	<cell X="47" Y="19"/>
-	<cell X="48" Y="19"/>
-	<cell X="49" Y="19"/>
-	<cell X="50" Y="19"/>
-	<cell X="51" Y="19"/>
-	<cell X="52" Y="19"/>
-	<cell X="53" Y="19">
-		<object name="wall"/>
+	<cell X="38" Y="19">
+		<object Name="WoodWall"/>
 	</cell>
-	<cell X="54" Y="19"/>
+	<cell X="39" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="40" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="41" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="42" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="43" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="44" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="45" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="46" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="47" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="48" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="49" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="50" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="51" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="52" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="53" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="54" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="55" Y="19"/>
 	<cell X="56" Y="19"/>
 	<cell X="57" Y="19"/>
@@ -1791,8 +2048,12 @@
 	<cell X="61" Y="19"/>
 	<cell X="62" Y="19"/>
 	<cell X="63" Y="19"/>
-	<cell X="64" Y="19"/>
-	<cell X="65" Y="19"/>
+	<cell X="64" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="65" Y="19">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="66" Y="19"/>
 	<cell X="67" Y="19"/>
 	<cell X="68" Y="19"/>
@@ -1813,13 +2074,17 @@
 	<cell X="3" Y="20"/>
 	<cell X="4" Y="20"/>
 	<cell X="5" Y="20"/>
-	<cell X="6" Y="20"/>
+	<cell X="6" Y="20">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="7" Y="20"/>
 	<cell X="8" Y="20"/>
 	<cell X="9" Y="20"/>
 	<cell X="10" Y="20"/>
 	<cell X="11" Y="20"/>
-	<cell X="12" Y="20"/>
+	<cell X="12" Y="20">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="20"/>
 	<cell X="14" Y="20"/>
 	<cell X="15" Y="20"/>
@@ -1893,13 +2158,27 @@
 	<cell X="3" Y="21"/>
 	<cell X="4" Y="21"/>
 	<cell X="5" Y="21"/>
-	<cell X="6" Y="21"/>
-	<cell X="7" Y="21"/>
-	<cell X="8" Y="21"/>
-	<cell X="9" Y="21"/>
-	<cell X="10" Y="21"/>
-	<cell X="11" Y="21"/>
-	<cell X="12" Y="21"/>
+	<cell X="6" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="7" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="8" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="9" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="10" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="11" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
+	<cell X="12" Y="21">
+		<object Name="WoodWall"/>
+	</cell>
 	<cell X="13" Y="21"/>
 	<cell X="14" Y="21"/>
 	<cell X="15" Y="21"/>
