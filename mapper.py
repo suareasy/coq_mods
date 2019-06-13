@@ -66,8 +66,8 @@ def main( imagefile, mappingfile, output ):
     l = len( data[0] )
 
     root = Element( 'Map', {
-        'Width': str( w ),
-        'Length': str( l )
+        'height': str( w ),
+        'width': str( l )
     })
     root.text = '\n\t'
 
@@ -88,12 +88,17 @@ def main( imagefile, mappingfile, output ):
                 
                 cellement.text = '\n\t\t'
                 
-                obj = SubElement( cellement, 'object', {'name': mapping} )
+                obj = SubElement( cellement, 'object', {'Name': mapping} )
                 obj.tail = '\n\t'
 
     root[-1].tail = '\n'
 
-    with open( output, 'w' ) as f:
-        f.write( tostring( root ).decode( 'utf-8' ))
 
-main( 'test.html', 'mappings.csv', 'test.rpm' )
+    finaltree =  ElementTree( root )
+
+    finaltree.write( output, encoding = 'utf-8', xml_declaration = True )
+
+#    with open( output, 'w' ) as f:
+#        f.write( tostring( root ).decode( 'utf-8' ))
+
+main( 'test/fake_town.html', 'test/mappings.csv', 'test/Joppa.rpm' )
