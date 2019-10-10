@@ -101,4 +101,4 @@ def main( imagefile, mappingfile, output ):
 #    with open( output, 'w' ) as f:
 #        f.write( tostring( root ).decode( 'utf-8' ))
 
-main( 'test/fake_town.html', 'test/mappings.csv', 'test/Joppa.rpm' )
+main( 'test/fake_town2.html', 'test/mappings.csv', 'test/Joppa2.rpm' )
