@@ -49,10 +49,16 @@ class Application( tk.Frame ):
         cx = cellboundaries[2]
         cy = cellboundaries[0]
 
+        cell = self.canvas.find_closest( x, y )
 
+
+        print( self.canvas.gettags( cell ))
+        print( 'sdfsdfsdf' )
+
+        self.canvas.addtag_closest( 'WoodWall', x, y )
         self.canvas.create_rectangle( res['x'][0],res['y'][0], res['x'][1], 
             res['y'][1], fill = 'red', 
-            tags = ('x-{0},y-{1}'.format( cx, cy ), 'WoodWall', 'WoodWall'))
+            tags = tag )
 
         # self.draw = True
 
@@ -86,19 +92,23 @@ class Application( tk.Frame ):
             f.write( tostring( maproot ).decode( 'utf-8' ))
         for chunk in meat:
             tags = self.canvas.gettags( chunk )
-            print( tags )
-            x = tags[0].split( ',' )[0].split( '-' )[-1]
-            y = tags[0].split( ',' )[1].split( '-' )[-1]
+            coords = self.canvas.coords( chunk )
+            x = str( int( coords[0] ) // 10 )
+            y = str( int( coords[1] ) // 10 )
+            print( x, y )
+            # x = tags[0].split( ',' )[0].split( '-' )[-1]
+            # y = tags[0].split( ',' )[1].split( '-' )[-1]
             e = maproot.find( './/cell[@X="{0}"][@Y="{1}"]'.format( x, y ))
 
-            se = SubElement( e, 'object', {'Name': 'WoodWall'} )
+            for tag in tags:
+                se = SubElement( e, 'object', {'Name': tag} )
 
-            se.tail = '\n\t\t\t'
-        e[-1].tail = e.tail
+                se.tail = '\n\t\t\t'
+        #e[-1].tail = e.tail
 
-        maproot[-1].tail = '\n'
+        #maproot[-1].tail = '\n'
 
-        # print( tostring( maproot ).decode( 'utf-8' ))        
+        print( tostring( maproot ).decode( 'utf-8' ))        
 
     def create_widgets( self ):
         self.process = tk.Button( self )
@@ -124,6 +134,10 @@ class Application( tk.Frame ):
         
         for h in range( 0, canvasheight + 10, 10 ):
             self.canvas.create_line( 0, h, canvaswidth, h, tags = ('coordinates', h/10) )
+
+        for w in range( 0, canvaswidth, 10 ):
+            for h in range( 0, canvasheight, 10 ):
+                self.canvas.create_rectangle( w, h, w + 10, h + 10, fill = 'green' )
 
         self.mframe = tk.Frame( self.master )
         self.mframe.pack( side = tk.RIGHT )
