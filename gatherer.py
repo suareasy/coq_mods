@@ -23,16 +23,15 @@ for map in maps:
     width = root.attrib['Width']
     height = root.attrib['Height']
 
-    for x in range( int( width )):
-        for y in range( int( height )):
-            e = root.find( './/cell[@X="{0}"][@Y="{1}"]'.format( str( x ), str( y )))
-            if e is not None:
-                if len( e ) > 1:
-                    print( tostring( e ).decode( 'utf-8' ))
+    # for x in range( int( width )):
+    #     for y in range( int( height )):
+    #         e = root.find( './/cell[@X="{0}"][@Y="{1}"]'.format( str( x ), str( y )))
+    #         if e is not None:
+    #             if len( e ) > 1:
+    #                 print( tostring( e ).decode( 'utf-8' ))
                     # print( '-------------------\n')
                     # for child in e:
                     #     print( child.attrib['Name'] )
-    continue
 
     src = map.split( '/' )[-1][:-4]
     print( src )
