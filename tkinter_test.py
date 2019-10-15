@@ -1,7 +1,13 @@
 import tkinter as tk
+from tkinter import ttk
 from lxml.etree import *
 from PIL import Image, ImageTk
-import time
+import time, importlib
+import functools, operator, sys
+import parse_blueprint
+
+# doubled recursion limit
+sys.setrecursionlimit( 10000 )
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
@@ -15,16 +21,45 @@ class Application( tk.Frame ):
         self.currenttimetag = None
         self.drawing = False
         self.color = None
+        self.image = None
+        self.blueprints = parse_blueprint.main()
+        self.folders = None
+        self.counter = 0
+        self.images = {}
         self.create_widgets()
+        self.buildfolders()
 
-    def setcolor( self ):
-        selection = self.listbox.curselection()
+    def setimage( self, res ):
+        selection = self.tree.selection()
 
-        if selection == ():
+        if selection == () or selection is None:
             return
-        
-        color = mapping[ self.listbox.get( selection[0] )]
-        self.color = color
+
+        print( 'asdasdasd', selection)
+        selection = self.tree.item( selection[0] )['text']
+
+        object = self.blueprints.find( './/object[@name="{}"]'.format( selection ))
+
+        if object is not None:
+            imagepath = object.attrib['image']
+
+        if imagepath != 'None':
+           
+
+            image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
+            width, height = image.size
+            ratio = self.oom / height
+            image = image.resize( (int( width * ratio ), self.oom ) )
+            self.image = image = ImageTk.PhotoImage( image )
+            newid = self.canvas.create_image( (res['x'][0],res['y'][0]), image = image, anchor = 'nw' )
+            self.images[newid] = self.image
+        else:
+
+            color = 'yellow'
+
+            newid = self.canvas.create_rectangle( res['x'][0],res['y'][0], res['x'][1], 
+                res['y'][1], fill = color, 
+                tags = ( selection, 'item', self.currenttimetag) )
 
 
     def stopdrawing( self, event ):
@@ -75,19 +110,8 @@ class Application( tk.Frame ):
 
         cell = self.canvas.find_closest( x, y )
 
-        selection = self.listbox.curselection()
+        self.setimage( res )
 
-        if selection == ():
-            return
-
-        tag = self.listbox.get( selection[0] )
-
-        self.setcolor()
-
-        # print( tag )
-        newid = self.canvas.create_rectangle( res['x'][0],res['y'][0], res['x'][1], 
-            res['y'][1], fill = self.color, 
-            tags = ( tag, 'item', self.currenttimetag) )
 
 
 
@@ -150,19 +174,28 @@ class Application( tk.Frame ):
 
 
     def create_widgets( self ):
-        self.process = tk.Button( self, text = 'Process', command = self.process_canvas )
-        self.process.pack( side = tk.RIGHT )
 
-        self.process = tk.Button( self, text = 'reset', command = self.reset_canvas )
-        self.process.pack( side = tk.RIGHT )
+        self.menuframe = tk.Frame( self.master )
+        self.menuframe.pack( side = tk.TOP )
 
-        self.process = tk.Button( self, text = 'undo', command = self.undo )
-        self.process.pack( side = tk.RIGHT )
+        self.buttonframe = tk.Frame( self.menuframe )
+        self.buttonframe.pack( side = tk.RIGHT )
+        self.process = tk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
+        self.process.pack( side = tk.TOP )
+
+        self.reset = tk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
+        self.reset.pack( side = tk.TOP )
+
+        self.undo = tk.Button( self.buttonframe, text = 'undo', command = self.undo )
+        self.undo.pack( side = tk.TOP )
 
         canvaswidth = 80 * self.oom
         canvasheight = 25 * self.oom
 
-        self.cframe = tk.Frame( self.master )
+        self.contentframe = tk.Frame( self.master )
+        self.contentframe.pack( side = tk.BOTTOM )
+
+        self.cframe = tk.Frame( self.contentframe )
         self.cframe.pack( side = tk.LEFT )
         self.canvas = tk.Canvas( self.cframe, width = canvaswidth, height = canvasheight, 
             relief = tk.GROOVE, bg = 'white' )
@@ -181,24 +214,17 @@ class Application( tk.Frame ):
             for h in range( 0, canvasheight, self.oom ):
                 self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, fill = 'green', tags = 'base' )
 
-        img = Image.open( r'test.bmp' )
-        iw, ih = img.size
-        ratio = self.oom / ih
-        img = img.resize( (int( iw * ratio ), self.oom ) )
-        print( img.size, ratio, ih )
-        self.img = img = ImageTk.PhotoImage( img )
-        self.canvas.create_image( (0, 0), image = img, anchor = 'nw' )
 
-        self.mframe = tk.Frame( self.master )
-        self.mframe.pack( side = tk.LEFT )
+        self.listframe = tk.Frame( self.contentframe )
+        self.listframe.pack( side = tk.LEFT )
 
-        self.listbox = tk.Listbox( self.mframe )
+        self.listbox = tk.Listbox( self.listframe )
         for i in range( 4 ):
             self.listbox.insert( i, 'WoodWall' + str( i ))
         self.listbox.pack( side = tk.TOP )
 
 
-        # self.quit = tk.Button( self.mframe, text="QUIT", fg="red", 
+        # self.quit = tk.Button( self.mframe, text='QUIT', fg='red', 
         #     command = self.master.destroy )
 
         # self.quit.pack( side= tk.BOTTOM )
@@ -206,11 +232,72 @@ class Application( tk.Frame ):
         # self.bframe = tk.Frame( self.master )
         # self.bframe.pack( side = tk.BOTTOM )
 
-        self.infobox = tk.Listbox( self.mframe )
+        self.infobox = tk.Listbox( self.listframe )
         self.canvas.bind( '<Button-3>', self.getinfo )
 
         self.infobox.pack( side = tk.BOTTOM )
 
+        self.treeframe = tk.Frame( self.menuframe )
+        self.treeframe.pack( side = tk.LEFT )
+        self.tree = ttk.Treeview( self.treeframe )
+
+        self.tree['columns'] = ('one', 'two')
+        self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
+        self.tree.column( 'one', width = 150, minwidth = 150, stretch = tk.NO )
+
+        self.tree.heading( '#0',text = 'Name',anchor = tk.W )
+        self.tree.heading( 'one', text='Description', anchor = tk.W )
+
+
+
+    def buildfolders( self, level = None ):
+        self.counter += 1
+        if self.counter > 5000:
+            return
+        if self.folders is None:
+            self.folders = {}
+
+        # if mapping == []:
+        #     blueprints = self.blueprints
+        # else:
+        #     blueprints = functools.reduce( operator.getitem, mapping, self.blueprints )
+
+        if level is None:
+            blueprints = self.blueprints.getchildren()[0]
+            parent = ''
+            self.folders[parent] = ''
+
+        else:
+            blueprints = self.blueprints.find( './/object[@name="{}"]'.format( level ))
+            # print( tostring( blueprints.getparent()).decode( 'utf-8' )[:100])
+            # print( blueprints.getparent().attrib)
+            # print( level )
+            parent = blueprints.getparent().attrib['name']
+            if parent == 'Object':
+                parent = ''
+
+        for blueprint in blueprints:
+            name = blueprint.attrib['name']
+            if len( blueprint ) > 0:
+                self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name, values = 'A' )
+                self.buildfolders( name )
+            else:
+                # if blueprint.attrib.get( 'image' ) is not None:
+                value = blueprint.attrib.get( 'description', '' )
+                value = value.replace( ' ', '-' )
+                value = value.replace( '"', '\\"')
+                self.tree.insert( self.folders[parent], tk.END, text = name, values = (value ))
+
+
+    
+        # self.tree.bind( '<Button-1>', self.callback )
+
+        # folder1=self.tree.insert('', 1, '', text = 'Folder 1', values = ('23-Jun-17') )
+        # self.tree.insert('', 2, '', text = 'text_file.txt', values = ('23-Jun-17') )
+        # self.tree.insert(folder1, 'end', '', text='photo1.png', values=('23-Jun-17'))
+        # self.tree.insert(folder1, 'end', '', text='photo2.png', values=('23-Jun-17'))
+        # self.tree.insert(folder1, 'end', '', text='photo3.png', values=('23-Jun-17'))
+        self.tree.pack( side = tk.LEFT, fill = tk.X )
 
 
 
@@ -226,12 +313,15 @@ class Application( tk.Frame ):
             self.infobox.insert( items.index( item ) + len( items ), self.canvas.gettags( item ))
 
 
+#blueprint = parse_blueprint.main()
+
 
 orderofmagnitude = 30
 
 width = 100 * orderofmagnitude
 height = 30 * orderofmagnitude 
 
+colors = ['red', 'green', 'blue', 'yellow']
 mapping = {'WoodWall' + str(i): colors[i] for i in range( len( colors ))}
 
 root = tk.Tk()
