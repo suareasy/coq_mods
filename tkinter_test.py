@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from lxml.etree import *
 from PIL import Image, ImageTk
-import time, importlib
+import time, importlib, re
 import functools, operator, sys
 import parse_blueprint
 
@@ -43,6 +43,8 @@ class Application( tk.Frame ):
         if object is not None:
             imagepath = object.attrib['image']
 
+        tags = ('object='+selection, 'item', self.currenttimetag)
+
         if imagepath != 'None':
            
 
@@ -51,15 +53,16 @@ class Application( tk.Frame ):
             ratio = self.oom / height
             image = image.resize( (int( width * ratio ), self.oom ) )
             self.image = image = ImageTk.PhotoImage( image )
-            newid = self.canvas.create_image( (res['x'][0],res['y'][0]), image = image, anchor = 'nw' )
+            newid = self.canvas.create_image( (res['x'][0],res['y'][0]), 
+                image = image, anchor = tk.NW, tags = tags )
+
             self.images[newid] = self.image
         else:
 
             color = 'yellow'
 
-            newid = self.canvas.create_rectangle( res['x'][0],res['y'][0], res['x'][1], 
-                res['y'][1], fill = color, 
-                tags = ( selection, 'item', self.currenttimetag) )
+            newid = self.canvas.create_rectangle( res['x'][0], res['y'][0], 
+                res['x'][1], res['y'][1], fill = color, tags = tags )
 
 
     def stopdrawing( self, event ):
@@ -149,10 +152,15 @@ class Application( tk.Frame ):
             # y = tags[0].split( ',' )[1].split( '-' )[-1]
             e = maproot.find( './/cell[@X="{0}"][@Y="{1}"]'.format( x, y ))
 
-            for tag in tags:
-                se = SubElement( e, 'object', {'Name': tag} )
+            regex = re.compile( r'^object=(.*)$' )
+            name = list( filter( regex.match, tags ))#[0].split( '=' )[1]
+            if name == []:
+                continue
 
-                se.tail = '\n\t\t\t'
+            name = name[0].split( '=' )[1]
+            se = SubElement( e, 'object', {'Name': name} )
+
+            se.tail = '\n\t\t\t'
         #e[-1].tail = e.tail
 
         #maproot[-1].tail = '\n'
@@ -164,7 +172,6 @@ class Application( tk.Frame ):
             self.canvas.delete( item )
 
     def undo( self ):
-        print( self.recentchanges )
         if self.recentchanges != []:
             items = self.canvas.find_withtag( self.recentchanges[-1])
             for item in items:
@@ -181,6 +188,7 @@ class Application( tk.Frame ):
         self.buttonframe = tk.Frame( self.menuframe )
         self.buttonframe.pack( side = tk.RIGHT )
         self.process = tk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
+
         self.process.pack( side = tk.TOP )
 
         self.reset = tk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
@@ -199,6 +207,7 @@ class Application( tk.Frame ):
         self.cframe.pack( side = tk.LEFT )
         self.canvas = tk.Canvas( self.cframe, width = canvaswidth, height = canvasheight, 
             relief = tk.GROOVE, bg = 'white' )
+
         self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
         self.canvas.bind( '<Button-1>', self.callback )
         self.canvas.bind( '<B1-Motion>', self.callback )
@@ -218,10 +227,10 @@ class Application( tk.Frame ):
         self.listframe = tk.Frame( self.contentframe )
         self.listframe.pack( side = tk.LEFT )
 
-        self.listbox = tk.Listbox( self.listframe )
-        for i in range( 4 ):
-            self.listbox.insert( i, 'WoodWall' + str( i ))
-        self.listbox.pack( side = tk.TOP )
+        # self.listbox = tk.Listbox( self.listframe )
+        # for i in range( 4 ):
+        #     self.listbox.insert( i, 'WoodWall' + str( i ))
+        # self.listbox.pack( side = tk.TOP )
 
 
         # self.quit = tk.Button( self.mframe, text='QUIT', fg='red', 
@@ -257,10 +266,6 @@ class Application( tk.Frame ):
         if self.folders is None:
             self.folders = {}
 
-        # if mapping == []:
-        #     blueprints = self.blueprints
-        # else:
-        #     blueprints = functools.reduce( operator.getitem, mapping, self.blueprints )
 
         if level is None:
             blueprints = self.blueprints.getchildren()[0]
@@ -290,13 +295,6 @@ class Application( tk.Frame ):
 
 
     
-        # self.tree.bind( '<Button-1>', self.callback )
-
-        # folder1=self.tree.insert('', 1, '', text = 'Folder 1', values = ('23-Jun-17') )
-        # self.tree.insert('', 2, '', text = 'text_file.txt', values = ('23-Jun-17') )
-        # self.tree.insert(folder1, 'end', '', text='photo1.png', values=('23-Jun-17'))
-        # self.tree.insert(folder1, 'end', '', text='photo2.png', values=('23-Jun-17'))
-        # self.tree.insert(folder1, 'end', '', text='photo3.png', values=('23-Jun-17'))
         self.tree.pack( side = tk.LEFT, fill = tk.X )
 
 
@@ -312,8 +310,6 @@ class Application( tk.Frame ):
         for item in items[::-1]:
             self.infobox.insert( items.index( item ) + len( items ), self.canvas.gettags( item ))
 
-
-#blueprint = parse_blueprint.main()
 
 
 orderofmagnitude = 30

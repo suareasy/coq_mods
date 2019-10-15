@@ -1,7 +1,7 @@
 from lxml import etree
 from util import lxml_util
 import re, functools, operator
-
+# had to convert &#(\d+) to \1 when parsing  xml
 def main():
     blueprints = 'ObjectBlueprints.xml'
 
@@ -53,6 +53,41 @@ def main():
 
     lxml_util.indent( res, res )
     return( res )
+
+def quick():
+
+import re
+
+
+    result = []
+    o = {}
+    with open( 'log.txt', 'r' ) as f:
+        counter = 0
+        for line in f:
+            print( counter )
+            line = line.strip()
+
+            m = re.search( r'(commit|Author|Date):?\s+(.*)$', line )
+
+            if m is not None:
+                print( m )
+                o[m.group(1)] = m.group(2)
+
+            else:
+                if line == '':
+
+                    if counter == 1:
+                        result.append( o )
+                        o = {}
+                        counter = 0
+
+                    else:
+                        counter = 1
+
+                else:
+                    o['message'] = line
+
+            
 
 #print( etree.tostring( res ).decode( 'utf-8' ))
 
