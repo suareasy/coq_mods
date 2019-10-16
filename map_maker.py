@@ -21,8 +21,8 @@ class Application( tk.Frame ):
         self.image = None
         self.blueprints = parse_blueprint.main()
         self.folders = None
-        self.counter = 0
         self.images = {}
+        self.currentlocation = None
 
     def setimage( self, res ):
 
@@ -84,9 +84,7 @@ class Application( tk.Frame ):
 
             cellboundaries.append( int( itemtags[1][:-2] ))
             
-            # print( item )
             coords = self.canvas.coords( item )
-            # print( coords )
 
             if coords[0] != 0:
                 res['x'].append( coords[0] )
@@ -97,6 +95,13 @@ class Application( tk.Frame ):
         cellboundaries.sort()
         res['x'].sort()
         res['y'].sort()
+
+        if event.type == '6':
+            if self.currentlocation == res:
+                    return
+
+            else:
+                self.currentlocation = res
 
         if len( res['x'] ) == 1:
             res['x'] = [0] + res['x']
@@ -322,9 +327,6 @@ class Application( tk.Frame ):
 
 
     def build_folders( self, level = None ):
-        self.counter += 1
-        if self.counter > 5000:
-            return
         if self.folders is None:
             self.folders = {}
 
@@ -336,9 +338,6 @@ class Application( tk.Frame ):
 
         else:
             blueprints = self.blueprints.find( './/object[@name="{}"]'.format( level ))
-            # print( tostring( blueprints.getparent()).decode( 'utf-8' )[:100])
-            # print( blueprints.getparent().attrib)
-            # print( level )
             parent = blueprints.getparent().attrib['name']
             if parent == 'Object':
                 parent = ''
@@ -349,10 +348,6 @@ class Application( tk.Frame ):
                 self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name )
                 self.build_folders( name )
             else:
-                # if blueprint.attrib.get( 'image' ) is not None:
-                # value = blueprint.attrib.get( 'description', '' )
-                # value = value.replace( ' ', '-' )
-                # value = value.replace( '"', '\\"')
                 self.tree.insert( self.folders[parent], tk.END, text = name )
 
 
@@ -369,8 +364,19 @@ class Application( tk.Frame ):
         o = {'x1': x - d, 'y1': y - d, 'x2': x + d, 'y2': y + d }
         items = self.canvas.find_overlapping( **o )
 
+
+        regex = re.compile( r'object=(.*)' )
+
         for item in items[::-1]:
-            self.infobox.insert( items.index( item ) + len( items ), self.canvas.gettags( item ))
+            tags = self.canvas.gettags( item )
+            tags = list( filter( regex.match, tags ))
+
+            if tags == []:
+                return
+
+            else:
+                tag = tags[0].split( '=' )[1]
+                self.infobox.insert( items.index( item ) + len( items ), tag )
 
 
 
@@ -387,6 +393,5 @@ root.geometry( str( width ) + 'x' + str( height ))
 root.configure( background = '#525252' )
 app = Application( master = root, oom = orderofmagnitude )
 app.create_menu_widgets()
-# app.create_canvas()
 app.mainloop()
 
