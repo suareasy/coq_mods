@@ -6,15 +6,12 @@ import time, importlib, re
 import functools, operator, sys
 import parse_blueprint
 
-# doubled recursion limit
-sys.setrecursionlimit( 10000 )
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
         super().__init__( master )
         self.master = master
         self.draw = False
-        # self.grid()
         self.oom = oom
         self.recentchanges = []
         self.currenttime = 0
@@ -26,11 +23,6 @@ class Application( tk.Frame ):
         self.folders = None
         self.counter = 0
         self.images = {}
-        # self.get_object_description()
-        # self.get_tree_selection()
-        # self.create_menu_widgets()
-        # self.create_canvas()
-        # self.buildfolders()
 
     def setimage( self, res ):
 
@@ -49,7 +41,7 @@ class Application( tk.Frame ):
         if imagepath != 'None':
            
 
-            image = Image.open( 'textures/' + imagepath.lower() )
+            image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
             width, height = image.size
             ratio = self.oom / height
             image = image.resize( (int( width * ratio ), self.oom ) )
@@ -149,8 +141,6 @@ class Application( tk.Frame ):
             x = str( int( coords[0] ) // self.oom )
             y = str( int( coords[1] ) // self.oom )
 
-            # x = tags[0].split( ',' )[0].split( '-' )[-1]
-            # y = tags[0].split( ',' )[1].split( '-' )[-1]
             e = maproot.find( './/cell[@X="{0}"][@Y="{1}"]'.format( x, y ))
 
             regex = re.compile( r'^object=(.*)$' )
