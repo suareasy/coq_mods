@@ -14,7 +14,7 @@ class Application( tk.Frame ):
         super().__init__( master )
         self.master = master
         self.draw = False
-        self.pack()
+        # self.grid()
         self.oom = oom
         self.recentchanges = []
         self.currenttime = 0
@@ -26,24 +26,25 @@ class Application( tk.Frame ):
         self.folders = None
         self.counter = 0
         self.images = {}
-        self.create_widgets()
-        self.buildfolders()
+        # self.get_object_description()
+        # self.get_tree_selection()
+        # self.create_menu_widgets()
+        # self.create_canvas()
+        # self.buildfolders()
 
     def setimage( self, res ):
-        selection = self.tree.selection()
 
-        if selection == () or selection is None:
+        name = self.get_tree_selection()
+
+        if name is None:
             return
 
-        print( 'asdasdasd', selection)
-        selection = self.tree.item( selection[0] )['text']
-
-        object = self.blueprints.find( './/object[@name="{}"]'.format( selection ))
+        object = self.blueprints.find( './/object[@name="{}"]'.format( name ))
 
         if object is not None:
             imagepath = object.attrib['image']
 
-        tags = ('object='+selection, 'item', self.currenttimetag)
+        tags = ('object=' + name, 'item', self.currenttimetag)
 
         if imagepath != 'None':
            
@@ -165,8 +166,11 @@ class Application( tk.Frame ):
 
         #maproot[-1].tail = '\n'
 
-        print( tostring( maproot ).decode( 'utf-8' ))
-    
+        # print( tostring( maproot ).decode( 'utf-8' ))
+        with open( 'map1.rpm', 'w' ) as f:
+            f.write( tostring( maproot ).decode( 'utf-8' ))
+
+
     def reset_canvas( self ):
         for item in self.canvas.find_withtag( 'item' ):
             self.canvas.delete( item )
@@ -178,88 +182,156 @@ class Application( tk.Frame ):
                 self.canvas.delete( item )
             self.recentchanges = self.recentchanges[:-1]
 
+    def get_tree_selection( self ):
+        selection = self.tree.selection()
+
+        if selection == () or selection is None:
+            return
+
+        else:
+            return self.tree.item( selection[0] )['text']
 
 
-    def create_widgets( self ):
+    def get_object_description( self, event ):
+        name = self.get_tree_selection()
 
-        self.menuframe = tk.Frame( self.master )
-        self.menuframe.pack( side = tk.TOP )
+        if name is None:
+            return
 
-        self.buttonframe = tk.Frame( self.menuframe )
-        self.buttonframe.pack( side = tk.RIGHT )
-        self.process = tk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
 
-        self.process.pack( side = tk.TOP )
+        object = self.blueprints.find( './/object[@name="{}"]'.format( name ))
+        text = object.attrib['description']
 
-        self.reset = tk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
-        self.reset.pack( side = tk.TOP )
+        if text == 'None' or text is None:
+            text = 'Sorry. There is no description for \'{}\''.format( name )
 
-        self.undo = tk.Button( self.buttonframe, text = 'undo', command = self.undo )
-        self.undo.pack( side = tk.TOP )
+        self.infotext.config( state = tk.NORMAL )
+        self.infotext.delete( '1.0', tk.END )
+        self.infotext.insert( tk.END, text )
+
+        self.infotext.config( state = tk.DISABLED )
+        
+
+
+    def create_menu_widgets( self ):
+
+        o = {
+            'background': '#333333',
+            'foreground': '#c78626',
+            'relief': tk.FLAT,
+            'highlightthickness': 0,
+            'borderwidth': 0
+        }
+
+        ttk.Style().configure( 'TFrame', background = '#525252', 
+            borderwidth = 0, relief = tk.FLAT, highlightthickness = 0 )
+        ttk.Style().configure( 'Treeview', **o )
+        # ttk.Style().configure( 'Treeview' )
+        ttk.Style().configure( 'TText', **o )
+        ttk.Style().configure( 'TButton', **o )
+        ttk.Style().configure( 'TButton', relief = tk.RAISED, width = 10 )
+        self.menuframe = ttk.Frame( self.master )
+        self.menuframe.grid( row = 0 )
+
+        self.buttonframe = ttk.Frame( self.menuframe )
+        self.buttonframe.grid( row = 0 )
+
+        self.process = ttk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
+        self.process.grid( column = 1, row = 0, padx = 5 )
+
+        self.reset = ttk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
+        self.reset.grid( column = 2, row = 0, padx = 5 )
+
+        self.undo = ttk.Button( self.buttonframe, text = 'undo', command = self.undo )
+        self.undo.grid( column = 3, row = 0, padx = 5 )
+
+        self.quit = ttk.Button( self.buttonframe, text='QUIT', command = self.master.destroy )
+        self.quit.grid( column = 4, row = 0, padx = 5 )
+
+        self.contentframe = ttk.Frame( self.master )
+        self.contentframe.grid( column = 0, row = 1 )
+
+        self.treeframe = ttk.Frame( self.contentframe )
+        self.treeframe.grid( column = 0, row = 0, rowspan = 2, padx = 5 )
+
+
+        self.tree = ttk.Treeview( self.treeframe, height = 52 )
+
+        self.tree['columns'] = ('one')#, 'two')
+        self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
+        # self.tree.column( 'one', width = 150, minwidth = 150, stretch = tk.NO )
+
+        self.tree.heading( '#0',text = 'Name',anchor = tk.W )
+        # self.tree.heading( 'one', text='Description', anchor = tk.W )
+
+        self.build_folders()
+
+        self.tree.bind( '<<TreeviewSelect>>', self.get_object_description )
+
+
+
+        self.create_canvas()
+
+
+
+        o = {
+            'background': '#333333',
+            'foreground': '#c78626',
+            'relief': tk.FLAT,
+            'width': 30,
+            'borderwidth': 0,
+            'highlightthickness': 0
+        }
+
+
+        self.infoframe = ttk.Frame( self.contentframe )
+        self.infoframe.grid( column = 1, row = 0, 
+        sticky = tk.N + tk.S + tk.W + tk.E, pady = 5 )
+
+        self.infotext = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
+            font = ('Consolas', 13), state = tk.DISABLED, height = 8 )
+        self.infotext.grid( column = 0, row = 0, sticky = tk.W, pady = 10 )
+
+        self.infobox = tk.Listbox( self.infoframe, **o, height = 10 )
+        self.infobox.grid( column = 0, row = 1, sticky = tk.W )
+
+
+    def create_canvas( self ):
+
 
         canvaswidth = 80 * self.oom
         canvasheight = 25 * self.oom
 
-        self.contentframe = tk.Frame( self.master )
-        self.contentframe.pack( side = tk.BOTTOM )
-
-        self.cframe = tk.Frame( self.contentframe )
-        self.cframe.pack( side = tk.LEFT )
-        self.canvas = tk.Canvas( self.cframe, width = canvaswidth, height = canvasheight, 
-            relief = tk.GROOVE, bg = 'white' )
+        self.canvas = tk.Canvas( self.contentframe, width = canvaswidth, 
+            height = canvasheight, borderwidth = 0, relief = tk.FLAT, 
+            background = '#7d7d7a', highlightthickness = 0 )
 
         self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
         self.canvas.bind( '<Button-1>', self.callback )
         self.canvas.bind( '<B1-Motion>', self.callback )
-        self.canvas.pack()
 
-        for w in range( 0, canvaswidth + self.oom, self.oom ):
-            self.canvas.create_line( w, 0, w, canvasheight, tags = ('coordinates',w / self.oom ))
-        
-        for h in range( 0, canvasheight + self.oom, self.oom ):
-            self.canvas.create_line( 0, h, canvaswidth, h, tags = ('coordinates', h / self.oom ))
+        self.canvas.grid( column = 1, row = 1, sticky = tk.N )
 
         for w in range( 0, canvaswidth, self.oom ):
             for h in range( 0, canvasheight, self.oom ):
-                self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, fill = 'green', tags = 'base' )
+                self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, 
+                    fill = '#c7c7c7', tags = 'base' )
+
+        for w in range( 0, canvaswidth + self.oom, self.oom ):
+            self.canvas.create_line( w, 0, w, canvasheight, 
+                fill = '#7d7d7a', tags = ('coordinates',w / self.oom ))
+        
+        for h in range( 0, canvasheight + self.oom, self.oom ):
+            self.canvas.create_line( 0, h, canvaswidth, h, 
+                fill = '#7d7d7a', tags = ('coordinates', h / self.oom ))
 
 
-        self.listframe = tk.Frame( self.contentframe )
-        self.listframe.pack( side = tk.LEFT )
 
-        # self.listbox = tk.Listbox( self.listframe )
-        # for i in range( 4 ):
-        #     self.listbox.insert( i, 'WoodWall' + str( i ))
-        # self.listbox.pack( side = tk.TOP )
-
-
-        # self.quit = tk.Button( self.mframe, text='QUIT', fg='red', 
-        #     command = self.master.destroy )
-
-        # self.quit.pack( side= tk.BOTTOM )
-
-        # self.bframe = tk.Frame( self.master )
-        # self.bframe.pack( side = tk.BOTTOM )
-
-        self.infobox = tk.Listbox( self.listframe )
         self.canvas.bind( '<Button-3>', self.getinfo )
 
-        self.infobox.pack( side = tk.BOTTOM )
-
-        self.treeframe = tk.Frame( self.menuframe )
-        self.treeframe.pack( side = tk.LEFT )
-        self.tree = ttk.Treeview( self.treeframe )
-
-        self.tree['columns'] = ('one', 'two')
-        self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
-        self.tree.column( 'one', width = 150, minwidth = 150, stretch = tk.NO )
-
-        self.tree.heading( '#0',text = 'Name',anchor = tk.W )
-        self.tree.heading( 'one', text='Description', anchor = tk.W )
 
 
-
-    def buildfolders( self, level = None ):
+    def build_folders( self, level = None ):
         self.counter += 1
         if self.counter > 5000:
             return
@@ -284,18 +356,18 @@ class Application( tk.Frame ):
         for blueprint in blueprints:
             name = blueprint.attrib['name']
             if len( blueprint ) > 0:
-                self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name, values = 'A' )
-                self.buildfolders( name )
+                self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name )
+                self.build_folders( name )
             else:
                 # if blueprint.attrib.get( 'image' ) is not None:
-                value = blueprint.attrib.get( 'description', '' )
-                value = value.replace( ' ', '-' )
-                value = value.replace( '"', '\\"')
-                self.tree.insert( self.folders[parent], tk.END, text = name, values = (value ))
+                # value = blueprint.attrib.get( 'description', '' )
+                # value = value.replace( ' ', '-' )
+                # value = value.replace( '"', '\\"')
+                self.tree.insert( self.folders[parent], tk.END, text = name )
 
 
     
-        self.tree.pack( side = tk.LEFT, fill = tk.X )
+        self.tree.grid()
 
 
 
@@ -322,6 +394,9 @@ mapping = {'WoodWall' + str(i): colors[i] for i in range( len( colors ))}
 
 root = tk.Tk()
 root.geometry( str( width ) + 'x' + str( height ))
+root.configure( background = '#525252' )
 app = Application( master = root, oom = orderofmagnitude )
+app.create_menu_widgets()
+# app.create_canvas()
 app.mainloop()
 
