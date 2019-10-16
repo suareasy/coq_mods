@@ -1,6 +1,8 @@
 from lxml import etree
 from util import lxml_util
 import re, functools, operator
+import os, shutil
+
 
 # had to convert &#(\d+) to \1 when parsing  xml
 def main():
@@ -59,11 +61,9 @@ def main():
     lxml_util.indent( res, res )
     return( res )
 
-def quick():
-    import os
-    import shutil
+def modify_texture_location():
 
-    for thing in os.walk( '.' ):
+    for thing in os.walk( './Textures' ):
         print( thing )
 
         cur, subdir, files = thing
