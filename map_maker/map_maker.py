@@ -6,6 +6,16 @@ import time, importlib, re
 import functools, operator, sys
 import parse_blueprint
 
+args = sys.argv
+
+if len( args ) != 3:
+    print( ' I need two paths. One for blue prints and one for the tool kit.' )
+    quit()
+
+else:
+    
+    blueprintpath = args[1]
+    toolkitpath = args[2]
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
@@ -19,7 +29,7 @@ class Application( tk.Frame ):
         self.drawing = False
         self.color = None
         self.image = None
-        self.blueprints = parse_blueprint.main()
+        self.blueprints = parse_blueprint.main( blueprintpath, toolkitpath )
         self.folders = None
         self.images = {}
         self.currentlocation = None
@@ -377,6 +387,7 @@ class Application( tk.Frame ):
             else:
                 tag = tags[0].split( '=' )[1]
                 self.infobox.insert( items.index( item ) + len( items ), tag )
+
 
 
 

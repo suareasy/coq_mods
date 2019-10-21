@@ -5,7 +5,7 @@ import os, shutil
 
 
 # had to convert &#(\d+) to \1 when parsing  xml
-def main():
+def main( blueprintpath, toolkitpath ):
     blueprints = 'ObjectBlueprints.xml'
 
     with open( blueprints, 'r' ) as f:
@@ -61,16 +61,16 @@ def main():
     lxml_util.indent( res, res )
     return( res )
 
-def modify_texture_location():
+def modify_texture_location( toolkitpath ):
 
-    for thing in os.walk( './Textures' ):
+    for thing in os.walk( toolkitpath + '/Textures' ):
         print( thing )
 
         cur, subdir, files = thing
 
         cur = cur + '/'
 
-        moveto = '../textures/' + cur[2:]
+        moveto = toolkitpath + '/textures/' + cur[2:]
 
 
         for sd in subdir:
