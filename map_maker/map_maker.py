@@ -4,18 +4,6 @@ from lxml.etree import *
 from PIL import Image, ImageTk
 import time, importlib, re
 import functools, operator, sys
-import parse_blueprint
-
-args = sys.argv
-
-if len( args ) != 3:
-    print( ' I need two paths. One for blue prints and one for the tool kit.' )
-    quit()
-
-else:
-    
-    blueprintpath = args[1]
-    toolkitpath = args[2]
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
@@ -29,43 +17,55 @@ class Application( tk.Frame ):
         self.drawing = False
         self.color = None
         self.image = None
-        self.blueprints = parse_blueprint.main( blueprintpath, toolkitpath )
-        self.folders = None
+        self.blueprints = None
         self.images = {}
         self.currentlocation = None
 
-    def setimage( self, res ):
+    def setimage( self ):
 
         name = self.get_tree_selection()
 
         if name is None:
             return
 
-        object = self.blueprints.find( './/object[@name="{}"]'.format( name ))
+        qudobject = self.blueprints[name]
 
-        if object is not None:
-            imagepath = object.attrib['image']
 
-        tags = ('object=' + name, 'item', self.currenttimetag)
+        if qudobject is not None:
+            image = qudobject.tile
 
-        if imagepath != 'None':
+        if image is not None:
+            image = image.image
+
+        tags = ('object=' + name, 'item', self.currenttimetag )
+        print( self.currentlocation )
+        items = self.canvas.find_overlapping( **self.currentlocation )
+        item =  list( filter( lambda m: 'dot' in self.canvas.gettags( m ), items ))[0]
+
+        self.canvas.itemconfig( item, fill = self.canvas['background'], tags = ('dot', self.currenttimetag) )
+
+
+        if image is not None:
            
 
-            image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
+            # image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
             width, height = image.size
             ratio = self.oom / height
             image = image.resize( (int( width * ratio ), self.oom ) )
             self.image = image = ImageTk.PhotoImage( image )
-            newid = self.canvas.create_image( (res['x'][0],res['y'][0]), 
-                image = image, anchor = tk.NW, tags = tags )
+            newid = self.canvas.create_image( (self.currentlocation['x1'], 
+            self.currentlocation['y1']),image = image, anchor = tk.NW, tags = tags )
 
             self.images[newid] = self.image
         else:
 
             color = 'yellow'
 
-            newid = self.canvas.create_rectangle( res['x'][0], res['y'][0], 
-                res['x'][1], res['y'][1], fill = color, tags = tags )
+            coords = [y for x,y in self.currentlocation.items()]
+            coords = [x + self.oom/3 for x in coords[:2]] + [x - self.oom/3 for x in coords[2:]]
+            newid = self.canvas.create_rectangle( coords, fill = color, tags = tags )
+
+        
 
 
     def stopdrawing( self, event ):
@@ -74,54 +74,24 @@ class Application( tk.Frame ):
     def callback( self, event ):
         x = event.x
         y = event.y
-        d = self.oom
-        o = {'x1': x - d, 'y1': y - d, 'x2': x + d, 'y2': y + d }
+        xbar = ( x // self.oom ) * self.oom
+        ybar = ( y // self.oom ) * self.oom
+        o = {'x1': xbar, 'y1': ybar, 'x2': xbar + self.oom, 'y2': ybar + self.oom }
 
         if self.drawing == False:
             self.currenttimetag = time.time()
             self.recentchanges.append( self.currenttimetag )
             self.drawing = True
 
-        items = self.canvas.find_overlapping( **o )
-        res = {'x': [], 'y': []}
-        cellboundaries = []
-        for item in items:
-
-            itemtags = self.canvas.gettags( item )
-
-            if 'coordinates' not in itemtags:
-                continue
-
-            cellboundaries.append( int( itemtags[1][:-2] ))
-            
-            coords = self.canvas.coords( item )
-
-            if coords[0] != 0:
-                res['x'].append( coords[0] )
-
-            else:
-                res['y'].append( coords[-1] )
-
-        cellboundaries.sort()
-        res['x'].sort()
-        res['y'].sort()
 
         if event.type == '6':
-            if self.currentlocation == res:
+            if self.currentlocation == o:
                     return
 
             else:
-                self.currentlocation = res
+                self.currentlocation = o
 
-        if len( res['x'] ) == 1:
-            res['x'] = [0] + res['x']
-
-        cx = cellboundaries[2]
-        cy = cellboundaries[0]
-
-        cell = self.canvas.find_closest( x, y )
-
-        self.setimage( res )
+        self.setimage()
 
 
 
@@ -204,8 +174,8 @@ class Application( tk.Frame ):
             return
 
 
-        object = self.blueprints.find( './/object[@name="{}"]'.format( name ))
-        text = object.attrib['description']
+        object = self.blueprints.get( name )
+        text = object.desc
 
         if text == 'None' or text is None:
             text = 'Sorry. There is no description for \'{}\''.format( name )
@@ -319,16 +289,19 @@ class Application( tk.Frame ):
 
         for w in range( 0, canvaswidth, self.oom ):
             for h in range( 0, canvasheight, self.oom ):
-                self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, 
-                    fill = '#c7c7c7', tags = 'base' )
-
-        for w in range( 0, canvaswidth + self.oom, self.oom ):
-            self.canvas.create_line( w, 0, w, canvasheight, 
-                fill = '#7d7d7a', tags = ('coordinates',w / self.oom ))
+                # self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, 
+                #     fill = '#141313', tags = 'base', outline = '#141313' )
+                self.canvas.create_oval( w + self.oom/3, h + self.oom/3, 
+                    w + 2*self.oom/3, h + 2*self.oom/3, 
+                    fill = '#614112'  , tags = 'dot', outline = self.canvas['background'])
+#'#c78626'
+        # for w in range( 0, canvaswidth + self.oom, self.oom ):
+        #     self.canvas.create_line( w, 0, w, canvasheight, 
+        #         fill = '#7d7d7a', tags = ('coordinates',w / self.oom ))
         
-        for h in range( 0, canvasheight + self.oom, self.oom ):
-            self.canvas.create_line( 0, h, canvaswidth, h, 
-                fill = '#7d7d7a', tags = ('coordinates', h / self.oom ))
+        # for h in range( 0, canvasheight + self.oom, self.oom ):
+        #     self.canvas.create_line( 0, h, canvaswidth, h, 
+        #         fill = '#7d7d7a', tags = ('coordinates', h / self.oom ))
 
 
 
@@ -337,28 +310,46 @@ class Application( tk.Frame ):
 
 
     def build_folders( self, level = None ):
-        if self.folders is None:
-            self.folders = {}
+        folders = {'': ''}
 
 
-        if level is None:
-            blueprints = self.blueprints.getchildren()[0]
-            parent = ''
-            self.folders[parent] = ''
+        for name, info in self.blueprints.items():
+            ancestors = info.ancestors
+            descendants = info.descendants
 
-        else:
-            blueprints = self.blueprints.find( './/object[@name="{}"]'.format( level ))
-            parent = blueprints.getparent().attrib['name']
-            if parent == 'Object':
-                parent = ''
+            for ancestor in ancestors:
+                ancestorname = ancestor.name
 
-        for blueprint in blueprints:
-            name = blueprint.attrib['name']
-            if len( blueprint ) > 0:
-                self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name )
-                self.build_folders( name )
-            else:
-                self.tree.insert( self.folders[parent], tk.END, text = name )
+                if ancestorname == 'Object':
+                    continue
+                
+                parent = ancestors[ancestors.index( ancestor ) - 1].name
+
+                if parent == 'Object':
+                    parent = ''
+
+                if folders.get( ancestorname ) is None:
+                    folders[ancestorname] = self.tree.insert( folders[parent], 1, text = ancestorname )
+
+
+        # if level is None:
+        #     blueprints = self.blueprints.getchildren()[0]
+        #     parent = ''
+        #     self.folders[parent] = ''
+
+        # else:
+        #     blueprints = self.blueprints.find( './/object[@name="{}"]'.format( level ))
+        #     parent = blueprints.getparent().attrib['name']
+        #     if parent == 'Object':
+        #         parent = ''
+
+        # for blueprint in blueprints:
+        #     name = blueprint.attrib['name']
+        #     if len( blueprint ) > 0:
+        #         self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name )
+        #         self.build_folders( name )
+        #     else:
+        #         self.tree.insert( self.folders[parent], tk.END, text = name )
 
 
     
@@ -391,18 +382,4 @@ class Application( tk.Frame ):
 
 
 
-orderofmagnitude = 30
-
-width = 100 * orderofmagnitude
-height = 30 * orderofmagnitude 
-
-colors = ['red', 'green', 'blue', 'yellow']
-mapping = {'WoodWall' + str(i): colors[i] for i in range( len( colors ))}
-
-root = tk.Tk()
-root.geometry( str( width ) + 'x' + str( height ))
-root.configure( background = '#525252' )
-app = Application( master = root, oom = orderofmagnitude )
-app.create_menu_widgets()
-app.mainloop()
 
