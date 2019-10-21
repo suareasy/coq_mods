@@ -29,7 +29,7 @@ $ python3 map_maker.py /home/dsuarez/Downloads/Linux/CoQ_Data/StreamingAssets/Ba
 TODO
 --------------------------------------------------------------------------------
 
-* Incorporate tile processing from [hagadias](https://github.com/TrashMonks/hagadias/blob/master/README.md).
+* Incorporate tile processing from [hagadias](https://github.com/TrashMonks/hagadias).
 * Better listing for layered items.
 * Add a 'redo' button.
 * When holding left click, allow only one item per cell until you leave the cell.
