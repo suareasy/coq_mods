@@ -4,6 +4,7 @@ from lxml.etree import *
 from PIL import Image, ImageTk
 import time, importlib, re
 import functools, operator, sys
+import zooming
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
@@ -14,11 +15,13 @@ class Application( tk.Frame ):
         self.recentchanges = []
         self.currenttime = 0
         self.currenttimetag = None
+        self.currentitem = None
         self.drawing = False
         self.color = None
         self.image = None
         self.blueprints = None
         self.images = {}
+        self.framebgcolor = '#525252'
         self.currentlocation = None
 
     def setimage( self ):
@@ -87,9 +90,12 @@ class Application( tk.Frame ):
         if event.type == '6':
             if self.currentlocation == o:
                     return
-
             else:
                 self.currentlocation = o
+
+
+        else:
+            self.currentlocation = o
 
         self.setimage()
 
@@ -164,7 +170,8 @@ class Application( tk.Frame ):
             return
 
         else:
-            return self.tree.item( selection[0] )['text']
+            self.currentitem = self.tree.item( selection[0] )['text']
+            return self.currentitem
 
 
     def get_object_description( self, event ):
@@ -198,7 +205,7 @@ class Application( tk.Frame ):
             'borderwidth': 0
         }
 
-        ttk.Style().configure( 'TFrame', background = '#525252', 
+        ttk.Style().configure( 'TFrame', background = self.framebgcolor, 
             borderwidth = 0, relief = tk.FLAT, highlightthickness = 0 )
         ttk.Style().configure( 'Treeview', **o )
         # ttk.Style().configure( 'Treeview' )
@@ -223,6 +230,10 @@ class Application( tk.Frame ):
         self.quit = ttk.Button( self.buttonframe, text='QUIT', command = self.master.destroy )
         self.quit.grid( column = 4, row = 0, padx = 5 )
 
+        self.reload = ttk.Button( self.buttonframe, text='RELOAD', command = self.master.reloadit )
+        self.reload.grid( column = 5, row = 0, padx = 5 )
+
+
         self.contentframe = ttk.Frame( self.master )
         self.contentframe.grid( column = 0, row = 1 )
 
@@ -230,7 +241,7 @@ class Application( tk.Frame ):
         self.treeframe.grid( column = 0, row = 0, rowspan = 2, padx = 5 )
 
 
-        self.tree = ttk.Treeview( self.treeframe, height = 52 )
+        self.tree = ttk.Treeview( self.treeframe, height = 47 )
 
         self.tree['columns'] = ('one')#, 'two')
         self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
@@ -242,8 +253,6 @@ class Application( tk.Frame ):
         self.build_folders()
 
         self.tree.bind( '<<TreeviewSelect>>', self.get_object_description )
-
-
 
         self.create_canvas()
 
@@ -261,14 +270,55 @@ class Application( tk.Frame ):
 
         self.infoframe = ttk.Frame( self.contentframe )
         self.infoframe.grid( column = 1, row = 0, 
-        sticky = tk.N + tk.S + tk.W + tk.E, pady = 5 )
+            sticky = tk.N + tk.S + tk.W + tk.E, pady = 5 )
 
         self.infotext = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
-            font = ('Consolas', 13), state = tk.DISABLED, height = 8 )
-        self.infotext.grid( column = 0, row = 0, sticky = tk.W, pady = 10 )
+            font = ('Consolas', 13), state = tk.DISABLED, height = 10 )
+        self.infotext.grid( column = 0, row = 0, sticky = tk.W )
 
-        self.infobox = tk.Listbox( self.infoframe, **o, height = 10 )
-        self.infobox.grid( column = 0, row = 1, sticky = tk.W )
+        self.infobox = tk.Listbox( self.infoframe, **o, height = 13 )
+        self.infobox.grid( column = 1, row = 0, sticky = tk.W, padx = 5 )
+
+        self.sacred = ttk.Button( self.infoframe, text = 'sacred thing', 
+            command = self.print_sacred  )
+        self.sacred.grid( column = 2, row = 0 )
+
+    def print_sacred( self ):
+        o = {
+            'background': self.framebgcolor,
+            'relief': tk.FLAT,
+            'borderwidth': 0,
+            'height': 5 * self.oom,
+            'width': 100,
+            'highlightthickness': 0
+        }
+        self.canvas2 = tk.Canvas( self.infoframe, **o )
+        self.canvas2.grid( column = 3, row = 0 )
+
+        image = self.blueprints[self.currentitem].tile
+        if image is not None:
+            image = image.image
+            image = image.resize( (image.size[0] * self.oom//3, image.size[1] * self.oom//3))
+            self.image = image = ImageTk.PhotoImage( image )
+            self.canvas2.create_image( 0,0, image = image )
+        o = {
+            'background': '#333333',
+            'foreground': '#c78626',
+            'relief': tk.FLAT,
+            'width': 30,
+            'borderwidth': 0,
+            'highlightthickness': 0
+        }
+
+        self.infotext1 = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
+            font = ('Consolas', 13), state = tk.NORMAL, height = 10 )
+        self.infotext1.grid( column = 4, row = 0, sticky = tk.W )
+
+        xtag = self.blueprints[self.currentitem].attributes.get( 'xtag' )
+        text = 'NONE'
+        if xtag is not None:
+            text = xtag['TextFragments']['SacredThing']
+        self.infotext1.insert( '1.0', text )
 
 
     def create_canvas( self ):
@@ -276,36 +326,28 @@ class Application( tk.Frame ):
 
         canvaswidth = 80 * self.oom
         canvasheight = 25 * self.oom
+        path = '/home/dsuarez/github/coq_mods/map_maker/Textures/Creatures/aloe_round_1.bmp'  # place path to your image here
+        # self.canvasframe = zooming.Zoom_Canvas(self.contentframe, path )
+
+        # self.canvasframe.grid( column = 1, row = 1, sticky = tk.N )
 
         self.canvas = tk.Canvas( self.contentframe, width = canvaswidth, 
             height = canvasheight, borderwidth = 0, relief = tk.FLAT, 
-            background = '#7d7d7a', highlightthickness = 0 )
+            background = '#141313', highlightthickness = 0 )
 
-        self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
-        self.canvas.bind( '<Button-1>', self.callback )
-        self.canvas.bind( '<B1-Motion>', self.callback )
+        # self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
+        # self.canvas.bind( '<Button-1>', self.callback )
+        # self.canvas.bind( '<B1-Motion>', self.callback )
 
-        self.canvas.grid( column = 1, row = 1, sticky = tk.N )
-
+        # canvas = self.canvasframe.canvas
         for w in range( 0, canvaswidth, self.oom ):
             for h in range( 0, canvasheight, self.oom ):
-                # self.canvas.create_rectangle( w, h, w + self.oom, h + self.oom, 
-                #     fill = '#141313', tags = 'base', outline = '#141313' )
-                self.canvas.create_oval( w + self.oom/3, h + self.oom/3, 
-                    w + 2*self.oom/3, h + 2*self.oom/3, 
-                    fill = '#614112'  , tags = 'dot', outline = self.canvas['background'])
-#'#c78626'
-        # for w in range( 0, canvaswidth + self.oom, self.oom ):
-        #     self.canvas.create_line( w, 0, w, canvasheight, 
-        #         fill = '#7d7d7a', tags = ('coordinates',w / self.oom ))
-        
-        # for h in range( 0, canvasheight + self.oom, self.oom ):
-        #     self.canvas.create_line( 0, h, canvaswidth, h, 
-        #         fill = '#7d7d7a', tags = ('coordinates', h / self.oom ))
+                bbox = (w + self.oom/3, h + self.oom/3, w + 2*self.oom/3, h + 2*self.oom/3 )
+                self.canvas.create_oval(bbox = bbox, 
+                    fill = '#614112', tags = 'dot', outline = self.framebgcolor)
 
 
-
-        self.canvas.bind( '<Button-3>', self.getinfo )
+        # self.canvas.bind( '<Button-3>', self.getinfo )
 
 
 
@@ -332,27 +374,6 @@ class Application( tk.Frame ):
                     folders[ancestorname] = self.tree.insert( folders[parent], 1, text = ancestorname )
 
 
-        # if level is None:
-        #     blueprints = self.blueprints.getchildren()[0]
-        #     parent = ''
-        #     self.folders[parent] = ''
-
-        # else:
-        #     blueprints = self.blueprints.find( './/object[@name="{}"]'.format( level ))
-        #     parent = blueprints.getparent().attrib['name']
-        #     if parent == 'Object':
-        #         parent = ''
-
-        # for blueprint in blueprints:
-        #     name = blueprint.attrib['name']
-        #     if len( blueprint ) > 0:
-        #         self.folders[name] = self.tree.insert( self.folders[parent], 1, '', text = name )
-        #         self.build_folders( name )
-        #     else:
-        #         self.tree.insert( self.folders[parent], tk.END, text = name )
-
-
-    
         self.tree.grid()
 
 
