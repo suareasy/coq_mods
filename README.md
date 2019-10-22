@@ -1,12 +1,9 @@
-1. Purpose
-================================================================================
+# Purpose
 
 A home for any mods or tools for the game [Cave of Qud](http://www.cavesofqud.com/)
 
-2. Contents
-================================================================================
+# Contents
 
-1.1 Map Maker
---------------------------------------------------------------------------------
+## Map Maker
 
 _WIP_: A gui written in python that eases the creation of custom maps.
