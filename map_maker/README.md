@@ -33,3 +33,5 @@ TODO
 * Better listing for layered items.
 * Add a 'redo' button.
 * When holding left click, allow only one item per cell until you leave the cell.
+* Finalize zooming and panning of main canvas.
+* Add neat info feature when clicking on an object.
