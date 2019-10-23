@@ -22,6 +22,7 @@ class Application( tk.Frame ):
         self.blueprints = None
         self.images = {}
         self.framebgcolor = '#525252'
+        self.canvasbackground = '#141313'
         self.currentlocation = None
 
     def setimage( self ):
@@ -49,24 +50,19 @@ class Application( tk.Frame ):
 
 
         if image is not None:
-           
+            print( type( image ))
 
-            # image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
-            width, height = image.size
-            ratio = self.oom / height
-            image = image.resize( (int( width * ratio ), self.oom ) )
-            self.image = image = ImageTk.PhotoImage( image )
-            newid = self.canvas.create_image( (self.currentlocation['x1'], 
-            self.currentlocation['y1']),image = image, anchor = tk.NW, tags = tags )
+            newid = self.canvas.create( shape = 'image', 
+                position = (self.currentlocation['x1'], self.currentlocation['y1']), 
+                image = image, anchor = tk.NW, tags = tags )
 
-            self.images[newid] = self.image
         else:
 
             color = 'yellow'
 
             coords = [y for x,y in self.currentlocation.items()]
             coords = [x + self.oom/3 for x in coords[:2]] + [x - self.oom/3 for x in coords[2:]]
-            newid = self.canvas.create_rectangle( coords, fill = color, tags = tags )
+            newid = self.canvas.create( shape = 'rectangle', bbox = coords, fill = color, tags = tags )
 
         
 
@@ -324,30 +320,28 @@ class Application( tk.Frame ):
     def create_canvas( self ):
 
 
-        canvaswidth = 80 * self.oom
-        canvasheight = 25 * self.oom
-        path = '/home/dsuarez/github/coq_mods/map_maker/Textures/Creatures/aloe_round_1.bmp'  # place path to your image here
-        # self.canvasframe = zooming.Zoom_Canvas(self.contentframe, path )
+        width = 80 * self.oom
+        height = 25 * self.oom
 
-        # self.canvasframe.grid( column = 1, row = 1, sticky = tk.N )
+        self.canvas = zooming.Zoom_Canvas( master = self.contentframe, 
+            oom = self.oom, width = width, height = height, 
+            background = self.canvasbackground, highlightthickness = 0 )
 
-        self.canvas = tk.Canvas( self.contentframe, width = canvaswidth, 
-            height = canvasheight, borderwidth = 0, relief = tk.FLAT, 
-            background = '#141313', highlightthickness = 0 )
-
-        # self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
-        # self.canvas.bind( '<Button-1>', self.callback )
-        # self.canvas.bind( '<B1-Motion>', self.callback )
-
-        # canvas = self.canvasframe.canvas
-        for w in range( 0, canvaswidth, self.oom ):
-            for h in range( 0, canvasheight, self.oom ):
-                bbox = (w + self.oom/3, h + self.oom/3, w + 2*self.oom/3, h + 2*self.oom/3 )
-                self.canvas.create_oval(bbox = bbox, 
-                    fill = '#614112', tags = 'dot', outline = self.framebgcolor)
+        self.canvas.grid( column = 1, row = 1, sticky = tk.N )
 
 
-        # self.canvas.bind( '<Button-3>', self.getinfo )
+        self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
+        self.canvas.bind( '<Button-1>', self.callback )
+        self.canvas.bind( '<B1-Motion>', self.callback )
+
+        for w in range( 0, width, self.oom ):
+            for h in range( 0, height, self.oom ):
+                bbox = (w + self.oom/3, h + self.oom/3, w + 2*self.oom/3, h + 2*self.oom/3)
+                self.canvas.create( shape = 'oval', bbox = bbox, 
+                fill = '#614112', tags = 'dot', outline = self.canvasbackground)
+
+
+        self.canvas.bind( '<Button-3>', self.getinfo )
 
 
 
