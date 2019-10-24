@@ -140,6 +140,19 @@ class Zoom_Canvas( tk.Canvas ):
         shape = kwargs['shape']
         del kwargs['shape']
 
+        if shape == 'circle':
+            radius = kwargs['radius']
+            center = kwargs['center']
+            del kwargs['radius']
+            del kwargs['center']
+            x0, y0 = center
+            x0 -= radius
+            y0 -= radius
+            x1 = x0 + 2 * radius
+            y1 = y0 + 2 * radius
+            self.create_oval( x0, y0, x1, y1, **kwargs )
+
+
         bbox = kwargs.get( 'bbox' )
         position = kwargs.get( 'position' )
 
@@ -155,8 +168,8 @@ class Zoom_Canvas( tk.Canvas ):
             image_raw = kwargs['image']
             width, height = image_raw.size
             ratio = self.oom / height
-            image = image_raw.resize( (int( width * ratio ), self.oom ) )
-            self.image = image = ImageTk.PhotoImage( image_raw )
+            image = image_raw.resize( ( int( 16 * 1.3 ), int( 24 * 1.3 ) ))
+            self.image = image = ImageTk.PhotoImage( image )
             kwargs['image'] = image
 
             newid = getattr( self, 'create_' + shape )( x0, y0, **kwargs )

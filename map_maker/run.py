@@ -22,7 +22,7 @@ root = hagadias.GameRoot( gamepath )
 qoroot, qindex = root.get_object_tree()
 
 
-orderofmagnitude = 30
+orderofmagnitude = 25
 
 width = 100 * orderofmagnitude
 height = 30 * orderofmagnitude 
@@ -51,7 +51,6 @@ root.configure( background = '#525252' )
 def main():
 
     app = map_maker.Application( master = root, oom = orderofmagnitude )
-    print( root.children.keys())
     app.blueprints = qindex
     app.create_menu_widgets()
     # app.after( 10000, root.reloadit )

@@ -20,10 +20,13 @@ class Application( tk.Frame ):
         self.color = None
         self.image = None
         self.blueprints = None
+        self.items = {}
         self.images = {}
         self.framebgcolor = '#525252'
         self.canvasbackground = '#141313'
         self.currentlocation = None
+        self.wdiff = 16 * self.oom // 20
+        self.hdiff = 24 * self.oom // 20
 
     def setimage( self ):
 
@@ -42,16 +45,14 @@ class Application( tk.Frame ):
             image = image.image
 
         tags = ('object=' + name, 'item', self.currenttimetag )
-        print( self.currentlocation )
         items = self.canvas.find_overlapping( **self.currentlocation )
         item =  list( filter( lambda m: 'dot' in self.canvas.gettags( m ), items ))[0]
 
-        self.canvas.itemconfig( item, fill = self.canvas['background'], tags = ('dot', self.currenttimetag) )
+        self.canvas.itemconfig( item, fill = self.canvas['background'], 
+        tags = ('dot', self.currenttimetag) )
 
 
         if image is not None:
-            print( type( image ))
-
             newid = self.canvas.create( shape = 'image', 
                 position = (self.currentlocation['x1'], self.currentlocation['y1']), 
                 image = image, anchor = tk.NW, tags = tags )
@@ -61,7 +62,7 @@ class Application( tk.Frame ):
             color = 'yellow'
 
             coords = [y for x,y in self.currentlocation.items()]
-            coords = [x + self.oom/3 for x in coords[:2]] + [x - self.oom/3 for x in coords[2:]]
+            coords = [coords[0] + self.wdiff // 4, coords[1] + self.hdiff // 4, coords[2] - self.wdiff, coords[3] - self.hdiff]
             newid = self.canvas.create( shape = 'rectangle', bbox = coords, fill = color, tags = tags )
 
         
@@ -70,12 +71,18 @@ class Application( tk.Frame ):
     def stopdrawing( self, event ):
         self.drawing = False
 
-    def callback( self, event ):
+    def get_qud_cell( self, event ):
         x = event.x
         y = event.y
-        xbar = ( x // self.oom ) * self.oom
-        ybar = ( y // self.oom ) * self.oom
-        o = {'x1': xbar, 'y1': ybar, 'x2': xbar + self.oom, 'y2': ybar + self.oom }
+        wdiff = self.wdiff
+        hdiff = self.hdiff
+        xbar = ( x // wdiff ) * wdiff
+        ybar = ( y // hdiff ) * hdiff
+        o = {'x1': xbar, 'y1': ybar, 'x2': xbar + 2 * wdiff, 'y2': ybar + 2 * hdiff }
+        return o
+
+    def callback( self, event ):
+        o = self.get_qud_cell( event )
 
         if self.drawing == False:
             self.currenttimetag = time.time()
@@ -166,16 +173,57 @@ class Application( tk.Frame ):
             return
 
         else:
-            self.currentitem = self.tree.item( selection[0] )['text']
-            return self.currentitem
+            return self.tree.item( selection[0] )['text']
+
+
+    def set_current_selection( self, event ):
+        selection = self.infobox.curselection()
+
+        if selection == () or selection is None:
+            return
+
+        name = self.infobox.get(selection[0])
+
+        objectid = self.items.get( name )
+
+        self.currentitem = {
+            'name': name,
+            'id': objectid
+        }
+        
+        self.tree.selection_set( objectid )
 
 
     def get_object_description( self, event ):
-        name = self.get_tree_selection()
+
+        name = None
+        if event.widget.winfo_id() == self.infobox.winfo_id():
+            selection = self.infobox.curselection()
+
+            if selection == () or selection is None:
+                return
+
+            name = self.infobox.get(selection[0])
+
+
+        else:
+            name = self.get_tree_selection()
+            if self.items.get( name ) is None:
+                self.items[name] = self.tree.focus()
+
 
         if name is None:
             return
 
+        local = {
+            'name': name,
+            'id': self.items[name]
+        }
+
+        # if local != self.currentitem:
+        #     self.currentitem = local
+
+        # self.tree.selection_set( self.currentitem['id'] )
 
         object = self.blueprints.get( name )
         text = object.desc
@@ -188,6 +236,37 @@ class Application( tk.Frame ):
         self.infotext.insert( tk.END, text )
 
         self.infotext.config( state = tk.DISABLED )
+        o = {
+            'background': self.framebgcolor,
+            'relief': tk.FLAT,
+            'borderwidth': 0,
+            'height': 200,
+            'width': 200,
+            'highlightthickness': 0
+        }
+
+        image = self.blueprints[name].tile
+
+        if image is not None:
+            image = image.image
+            image = image.resize( (image.size[0] * self.oom//4, image.size[1] * self.oom//4))
+
+            self.image = image = ImageTk.PhotoImage( image )
+
+            self.canvas2.create_image( 100, 100, image = image, tags = 'image' )
+
+        else:
+            self.canvas2.delete( 'image' )
+
+        # self.infotext1 = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
+        #     font = ('Consolas', 13), state = tk.NORMAL, height = 10 )
+        # self.infotext1.grid( column = 4, row = 0, sticky = tk.W )
+
+        # xtag = self.blueprints[self.currentitem].attributes.get( 'xtag' )
+        # text = 'NONE'
+        # if xtag is not None:
+        #     text = xtag['TextFragments']['SacredThing']
+        # self.infotext1.insert( '1.0', text )
         
 
 
@@ -272,56 +351,32 @@ class Application( tk.Frame ):
             font = ('Consolas', 13), state = tk.DISABLED, height = 10 )
         self.infotext.grid( column = 0, row = 0, sticky = tk.W )
 
-        self.infobox = tk.Listbox( self.infoframe, **o, height = 13 )
-        self.infobox.grid( column = 1, row = 0, sticky = tk.W, padx = 5 )
-
-        self.sacred = ttk.Button( self.infoframe, text = 'sacred thing', 
-            command = self.print_sacred  )
-        self.sacred.grid( column = 2, row = 0 )
-
-    def print_sacred( self ):
-        o = {
+        canvassettings = {
             'background': self.framebgcolor,
             'relief': tk.FLAT,
             'borderwidth': 0,
-            'height': 5 * self.oom,
-            'width': 100,
-            'highlightthickness': 0
-        }
-        self.canvas2 = tk.Canvas( self.infoframe, **o )
-        self.canvas2.grid( column = 3, row = 0 )
-
-        image = self.blueprints[self.currentitem].tile
-        if image is not None:
-            image = image.image
-            image = image.resize( (image.size[0] * self.oom//3, image.size[1] * self.oom//3))
-            self.image = image = ImageTk.PhotoImage( image )
-            self.canvas2.create_image( 0,0, image = image )
-        o = {
-            'background': '#333333',
-            'foreground': '#c78626',
-            'relief': tk.FLAT,
-            'width': 30,
-            'borderwidth': 0,
+            'height': 200,
+            'width': 200,
             'highlightthickness': 0
         }
 
-        self.infotext1 = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
-            font = ('Consolas', 13), state = tk.NORMAL, height = 10 )
-        self.infotext1.grid( column = 4, row = 0, sticky = tk.W )
+        self.canvas2 = tk.Canvas( self.infoframe, **canvassettings )
+        self.canvas2.grid( column = 2, row = 0 )
 
-        xtag = self.blueprints[self.currentitem].attributes.get( 'xtag' )
-        text = 'NONE'
-        if xtag is not None:
-            text = xtag['TextFragments']['SacredThing']
-        self.infotext1.insert( '1.0', text )
+        self.infobox = tk.Listbox( self.infoframe, **o, height = 13 )
+        self.infobox.grid( column = 3, row = 0, sticky = tk.E, padx = 5 )
+
+        self.infobox.bind( '<<ListboxSelect>>', self.get_object_description )
+        self.infobox.bind( '<Double-Button-1>', self.set_current_selection )
+
 
 
     def create_canvas( self ):
 
-
-        width = 80 * self.oom
-        height = 25 * self.oom
+        wdiff = self.wdiff
+        hdiff = self.hdiff
+        width = 80 * wdiff
+        height = 25 * hdiff
 
         self.canvas = zooming.Zoom_Canvas( master = self.contentframe, 
             oom = self.oom, width = width, height = height, 
@@ -334,10 +389,12 @@ class Application( tk.Frame ):
         self.canvas.bind( '<Button-1>', self.callback )
         self.canvas.bind( '<B1-Motion>', self.callback )
 
-        for w in range( 0, width, self.oom ):
-            for h in range( 0, height, self.oom ):
-                bbox = (w + self.oom/3, h + self.oom/3, w + 2*self.oom/3, h + 2*self.oom/3)
-                self.canvas.create( shape = 'oval', bbox = bbox, 
+        r = 2
+        for w in range( wdiff//2, width, wdiff ):
+            for h in range( hdiff//2, height, hdiff ):
+                center = (w,h)
+                # bbox = (w + wdiff/3, h + hdiff/3, w + 2*wdiff/3, h + 2*hdiff/3)
+                self.canvas.create( shape = 'circle', center = center, radius = 2, 
                 fill = '#614112', tags = 'dot', outline = self.canvasbackground)
 
 
@@ -374,19 +431,15 @@ class Application( tk.Frame ):
 
     def getinfo( self, event ):
         self.infobox.delete( 0, tk.END )
-        d = .1
-        x = event.x
-        y = event.y
-        o = {'x1': x - d, 'y1': y - d, 'x2': x + d, 'y2': y + d }
-        items = self.canvas.find_overlapping( **o )
 
+        o = self.get_qud_cell( event )
+        items = self.canvas.find_enclosed( **o )
 
         regex = re.compile( r'object=(.*)' )
 
         for item in items[::-1]:
             tags = self.canvas.gettags( item )
             tags = list( filter( regex.match, tags ))
-
             if tags == []:
                 return
 
