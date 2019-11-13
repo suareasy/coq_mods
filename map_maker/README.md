@@ -36,8 +36,7 @@ In the directory _path/to/game/_ should be the directory _CoQ\_Data/_
 TODO
 --------------------------------------------------------------------------------
 
-* ~~Incorporate tile processing from [hagadias](https://github.com/TrashMonks/hagadias).~~
- - DONE
+* ~~Incorporate tile processing from [hagadias](https://github.com/TrashMonks/hagadias).~~ DONE
 * Better listing for layered items.
 * Add a 'redo' button.
 * When holding left click, allow only one item per cell until you leave the cell.
