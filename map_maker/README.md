@@ -1,7 +1,7 @@
 Map Maker
 ================================================================================
 
-Python gui for generating custom maps for [Cave of Qud](http://www.cavesofqud.com/).
+Python gui for generating custom maps for [Caves of Qud](http://www.cavesofqud.com/).
 
 
 What does it do?
