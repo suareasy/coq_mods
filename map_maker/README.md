@@ -10,15 +10,14 @@ What does it do?
 map_maker allows users to easily create maps and export them to the desired _*.rpm_ 
 format to be used in any mod.
 
-Installation
+Installation and Requirements
 --------------------------------------------------------------------------------
+Needs 
+ * [hagadias](https://github.com/TrashMonks/hagadias)
+ * python3
 
-First, [hagadias](https://github.com/TrashMonks/hagadias) needs to be installed. 
 map\_maker uses **hagadias** as a data source to display information about a 
 selected item.
-
-After that, no installation is required.
-
 
 Tile support
 --------------------------------------------------------------------------------
@@ -28,10 +27,18 @@ the way this works by making sure map_maker can find the games _ObjectBlueprints
 file. This can be done including the path to its parent directory (see the example 
 below). Also, the [CavesofQudTileModdingToolkit.zip](https://www.dropbox.com/s/g8coebnzoqfema9/CavesofQudTileModdingToolkit.zip?dl=0) needs to be extracted into _map\_maker/_.
 
+```shell
+$ git clone git@github.com:billbrasky/coq_mods.git
+$ cd coq_mods/map_maker
 ```
+
+Down load and extract [CavesofQudTileModdingToolkit.zip](https://www.dropbox.com/s/g8coebnzoqfema9/CavesofQudTileModdingToolkit.zip?dl=0)
+
+```shell
 $ python3 run.py /path/to/game/
 ```
-In the directory _path/to/game/_ should be the directory _CoQ\_Data/_
+In the directory _path/to/game/_ should be the directory _CoQ\_Data/_. So for 
+me using the version from HumbleBundle on Linux the game path is, _~/Downloads/Linux/_.
 
 TODO
 --------------------------------------------------------------------------------
