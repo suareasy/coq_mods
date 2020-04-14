@@ -1,8 +1,11 @@
 from lxml import etree
 from util import lxml_util
 import re, functools, operator
+import os, shutil
+
+
 # had to convert &#(\d+) to \1 when parsing  xml
-def main():
+def main( blueprintpath, toolkitpath ):
     blueprints = 'ObjectBlueprints.xml'
 
     with open( blueprints, 'r' ) as f:
@@ -35,6 +38,10 @@ def main():
         if part['render'] is not None:
             imagelocation = part['render'].attrib.get( 'Tile' )
 
+        if imagelocation is not None:
+            if 'assets_content_textures_tiles_tile-9-4.png' in imagelocation:
+                imagelocation = 'tiles/tile-9-4.png'
+
         description = None
         if part['description'] is not None:
             description = part['description'].attrib.get( 'Short' )
@@ -54,39 +61,26 @@ def main():
     lxml_util.indent( res, res )
     return( res )
 
-def quick():
+def modify_texture_location( toolkitpath ):
 
-import re
+    for thing in os.walk( toolkitpath + '/Textures' ):
+        print( thing )
+
+        cur, subdir, files = thing
+
+        cur = cur + '/'
+
+        moveto = toolkitpath + '/textures/' + cur[2:]
 
 
-    result = []
-    o = {}
-    with open( 'log.txt', 'r' ) as f:
-        counter = 0
-        for line in f:
-            print( counter )
-            line = line.strip()
+        for sd in subdir:
+            os.makedirs( moveto + sd.lower())
 
-            m = re.search( r'(commit|Author|Date):?\s+(.*)$', line )
-
-            if m is not None:
-                print( m )
-                o[m.group(1)] = m.group(2)
-
-            else:
-                if line == '':
-
-                    if counter == 1:
-                        result.append( o )
-                        o = {}
-                        counter = 0
-
-                    else:
-                        counter = 1
-
-                else:
-                    o['message'] = line
-
+        for f in files:
+            curlocation = cur + f
+            end = moveto + f
+            end = end.lower()
+            shutil.copy( curlocation, end )
             
 
 #print( etree.tostring( res ).decode( 'utf-8' ))
