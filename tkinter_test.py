@@ -48,7 +48,7 @@ class Application( tk.Frame ):
         if imagepath != 'None':
            
 
-            image = Image.open( '/home/dsuarez/Downloads/textures/' + imagepath.lower() )
+            image = Image.open( 'textures/' + imagepath.lower() )
             width, height = image.size
             ratio = self.oom / height
             image = image.resize( (int( width * ratio ), self.oom ) )
