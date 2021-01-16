@@ -1,10 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
-from lxml.etree import *
+import lxml.etree as etree
 from PIL import Image, ImageTk
 import time, importlib, re
 import functools, operator, sys
-import zooming
+import app.parts.zooming as zooming
+import app.parts.themes as themes
+from app.parts.infoframe import InfoFrame
+from app.parts.map import Canvas
+from app.parts.tiledirectory import Tree
+
 
 class Application( tk.Frame ):
     def __init__( self, master = None, oom = 10 ):
@@ -27,6 +32,70 @@ class Application( tk.Frame ):
         self.currentlocation = None
         self.wdiff = 16 * self.oom // 20
         self.hdiff = 24 * self.oom // 20
+
+    def create_widgets( self ):
+
+
+        ttk.Style().configure( 'TFrame', background = self.framebgcolor, 
+            borderwidth = 0, relief = tk.FLAT, highlightthickness = 0 )
+        ttk.Style().configure( 'Treeview', **themes.o )
+        # ttk.Style().configure( 'Treeview' )
+        ttk.Style().configure( 'TText', **themes.o )
+        ttk.Style().configure( 'TButton', **themes.o )
+        ttk.Style().configure( 'TButton', relief = tk.RAISED, width = 10 )
+        self.menuframe = ttk.Frame( self.master )
+        self.menuframe.grid( row = 0 )
+
+        self.buttonframe = ttk.Frame( self.menuframe )
+        self.buttonframe.grid( row = 0 )
+
+        self.process = ttk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
+        self.process.grid( column = 1, row = 0, padx = 5 )
+
+        self.reset = ttk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
+        self.reset.grid( column = 2, row = 0, padx = 5 )
+
+        self.undo = ttk.Button( self.buttonframe, text = 'undo', command = self.undo )
+        self.undo.grid( column = 3, row = 0, padx = 5 )
+
+        self.quit = ttk.Button( self.buttonframe, text='QUIT', command = self.master.destroy )
+        self.quit.grid( column = 4, row = 0, padx = 5 )
+
+        self.reload = ttk.Button( self.buttonframe, text='RELOAD', command = self.master.reloadit )
+        self.reload.grid( column = 5, row = 0, padx = 5 )
+
+
+        self.contentframe = ttk.Frame( self.master )
+        self.contentframe.grid( column = 0, row = 1 )
+
+        self.treeframe = ttk.Frame( self.contentframe )
+        self.treeframe.grid( column = 0, row = 0, rowspan = 2, padx = 5 )
+        self.tree = Tree( self.treeframe, self.blueprints ).tree
+
+        # self.tree = ttk.Treeview( self.treeframe, height = 47 )
+
+        # self.tree['columns'] = ('one')#, 'two')
+        # self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
+        # # self.tree.column( 'one', width = 150, minwidth = 150, stretch = tk.NO )
+
+        # self.tree.heading( '#0',text = 'Name',anchor = tk.W )
+        # # self.tree.heading( 'one', text='Description', anchor = tk.W )
+
+        # self.build_folders()
+
+        self.tree.bind( '<<TreeviewSelect>>', self.get_object_description )
+
+        self.create_canvas()
+
+        self.infoframe = ttk.Frame( self.contentframe )
+        self.infoframe.grid( column = 1, row = 0, 
+            sticky = tk.N + tk.S + tk.W + tk.E, pady = 5 )
+
+        self.infoframecontent = InfoFrame( self.infoframe )
+        self.infobox = self.infoframecontent.infobox
+        self.infobox.bind( '<<ListboxSelect>>', self.get_object_description )
+        self.infobox.bind( '<Double-Button-1>', self.set_current_selection )
+
 
     def setimage( self ):
 
@@ -119,16 +188,16 @@ class Application( tk.Frame ):
 
         height = 25
         width = 80
-        maproot = Element( 'Map', {'Height': str( height ), 'Width': str( width )})
+        maproot = etree.Element( 'Map', {'Height': str( height ), 'Width': str( width )})
         maproot.text = '\n\t'
         for x in range( width ):
             for y in range( height ):
                 
-                e = SubElement( maproot, 'cell', {'X': str( x ), 'Y': str( y )} )
+                e = etree.SubElement( maproot, 'cell', {'X': str( x ), 'Y': str( y )} )
                 e.text = '\n\t\t'
                 e.tail = '\n\t'
         with open( 'test.xml', 'w' ) as f:
-            f.write( tostring( maproot ).decode( 'utf-8' ))
+            f.write( etree.tostring( maproot ).decode( 'utf-8' ))
         for chunk in meat:
             tags = self.canvas.gettags( chunk )
             coords = self.canvas.coords( chunk )
@@ -143,7 +212,7 @@ class Application( tk.Frame ):
                 continue
 
             name = name[0].split( '=' )[1]
-            se = SubElement( e, 'object', {'Name': name} )
+            se = etree.SubElement( e, 'object', {'Name': name} )
 
             se.tail = '\n\t\t\t'
         #e[-1].tail = e.tail
@@ -152,7 +221,7 @@ class Application( tk.Frame ):
 
         # print( tostring( maproot ).decode( 'utf-8' ))
         with open( 'map1.rpm', 'w' ) as f:
-            f.write( tostring( maproot ).decode( 'utf-8' ))
+            f.write( etree.tostring( maproot ).decode( 'utf-8' ))
 
 
     def reset_canvas( self ):
@@ -220,6 +289,7 @@ class Application( tk.Frame ):
             'id': self.items[name]
         }
 
+        self.canvas2 = self.infoframecontent.canvas2
         # if local != self.currentitem:
         #     self.currentitem = local
 
@@ -231,19 +301,12 @@ class Application( tk.Frame ):
         if text == 'None' or text is None:
             text = 'Sorry. There is no description for \'{}\''.format( name )
 
+        self.infotext = self.infoframecontent.infotext
         self.infotext.config( state = tk.NORMAL )
         self.infotext.delete( '1.0', tk.END )
         self.infotext.insert( tk.END, text )
 
         self.infotext.config( state = tk.DISABLED )
-        o = {
-            'background': self.framebgcolor,
-            'relief': tk.FLAT,
-            'borderwidth': 0,
-            'height': 200,
-            'width': 200,
-            'highlightthickness': 0
-        }
 
         image = self.blueprints[name].tile
 
@@ -258,7 +321,7 @@ class Application( tk.Frame ):
         else:
             self.canvas2.delete( 'image' )
 
-        # self.infotext1 = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
+        # self.infotext1 = tk.Text( self.infoframe, **themes.o, wrap = tk.WORD, 
         #     font = ('Consolas', 13), state = tk.NORMAL, height = 10 )
         # self.infotext1.grid( column = 4, row = 0, sticky = tk.W )
 
@@ -270,162 +333,44 @@ class Application( tk.Frame ):
         
 
 
-    def create_menu_widgets( self ):
-
-        o = {
-            'background': '#333333',
-            'foreground': '#c78626',
-            'relief': tk.FLAT,
-            'highlightthickness': 0,
-            'borderwidth': 0
-        }
-
-        ttk.Style().configure( 'TFrame', background = self.framebgcolor, 
-            borderwidth = 0, relief = tk.FLAT, highlightthickness = 0 )
-        ttk.Style().configure( 'Treeview', **o )
-        # ttk.Style().configure( 'Treeview' )
-        ttk.Style().configure( 'TText', **o )
-        ttk.Style().configure( 'TButton', **o )
-        ttk.Style().configure( 'TButton', relief = tk.RAISED, width = 10 )
-        self.menuframe = ttk.Frame( self.master )
-        self.menuframe.grid( row = 0 )
-
-        self.buttonframe = ttk.Frame( self.menuframe )
-        self.buttonframe.grid( row = 0 )
-
-        self.process = ttk.Button( self.buttonframe, text = 'Process', command = self.process_canvas )
-        self.process.grid( column = 1, row = 0, padx = 5 )
-
-        self.reset = ttk.Button( self.buttonframe, text = 'reset', command = self.reset_canvas )
-        self.reset.grid( column = 2, row = 0, padx = 5 )
-
-        self.undo = ttk.Button( self.buttonframe, text = 'undo', command = self.undo )
-        self.undo.grid( column = 3, row = 0, padx = 5 )
-
-        self.quit = ttk.Button( self.buttonframe, text='QUIT', command = self.master.destroy )
-        self.quit.grid( column = 4, row = 0, padx = 5 )
-
-        self.reload = ttk.Button( self.buttonframe, text='RELOAD', command = self.master.reloadit )
-        self.reload.grid( column = 5, row = 0, padx = 5 )
-
-
-        self.contentframe = ttk.Frame( self.master )
-        self.contentframe.grid( column = 0, row = 1 )
-
-        self.treeframe = ttk.Frame( self.contentframe )
-        self.treeframe.grid( column = 0, row = 0, rowspan = 2, padx = 5 )
-
-
-        self.tree = ttk.Treeview( self.treeframe, height = 47 )
-
-        self.tree['columns'] = ('one')#, 'two')
-        self.tree.column( '#0', width = 270, minwidth = 270, stretch = tk.NO )
-        # self.tree.column( 'one', width = 150, minwidth = 150, stretch = tk.NO )
-
-        self.tree.heading( '#0',text = 'Name',anchor = tk.W )
-        # self.tree.heading( 'one', text='Description', anchor = tk.W )
-
-        self.build_folders()
-
-        self.tree.bind( '<<TreeviewSelect>>', self.get_object_description )
-
-        self.create_canvas()
-
-
-
-        o = {
-            'background': '#333333',
-            'foreground': '#c78626',
-            'relief': tk.FLAT,
-            'width': 30,
-            'borderwidth': 0,
-            'highlightthickness': 0
-        }
-
-
-        self.infoframe = ttk.Frame( self.contentframe )
-        self.infoframe.grid( column = 1, row = 0, 
-            sticky = tk.N + tk.S + tk.W + tk.E, pady = 5 )
-
-        self.infotext = tk.Text( self.infoframe, **o, wrap = tk.WORD, 
-            font = ('Consolas', 13), state = tk.DISABLED, height = 10 )
-        self.infotext.grid( column = 0, row = 0, sticky = tk.W )
-
-        canvassettings = {
-            'background': self.framebgcolor,
-            'relief': tk.FLAT,
-            'borderwidth': 0,
-            'height': 200,
-            'width': 200,
-            'highlightthickness': 0
-        }
-
-        self.canvas2 = tk.Canvas( self.infoframe, **canvassettings )
-        self.canvas2.grid( column = 2, row = 0 )
-
-        self.infobox = tk.Listbox( self.infoframe, **o, height = 13 )
-        self.infobox.grid( column = 3, row = 0, sticky = tk.E, padx = 5 )
-
-        self.infobox.bind( '<<ListboxSelect>>', self.get_object_description )
-        self.infobox.bind( '<Double-Button-1>', self.set_current_selection )
 
 
 
     def create_canvas( self ):
-
-        wdiff = self.wdiff
-        hdiff = self.hdiff
-        width = 80 * wdiff
-        height = 25 * hdiff
-
-        self.canvas = zooming.Zoom_Canvas( master = self.contentframe, 
-            oom = self.oom, width = width, height = height, 
-            background = self.canvasbackground, highlightthickness = 0 )
-
-        self.canvas.grid( column = 1, row = 1, sticky = tk.N )
-
-
+        self.canvas = Canvas( self.contentframe, self.wdiff, self.hdiff, self.oom ).canvas
         self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
         self.canvas.bind( '<Button-1>', self.callback )
         self.canvas.bind( '<B1-Motion>', self.callback )
-
-        r = 2
-        for w in range( wdiff//2, width, wdiff ):
-            for h in range( hdiff//2, height, hdiff ):
-                center = (w,h)
-                # bbox = (w + wdiff/3, h + hdiff/3, w + 2*wdiff/3, h + 2*hdiff/3)
-                self.canvas.create( shape = 'circle', center = center, radius = 2, 
-                fill = '#614112', tags = 'dot', outline = self.canvasbackground)
-
-
         self.canvas.bind( '<Button-3>', self.getinfo )
+        # wdiff = self.wdiff
+        # hdiff = self.hdiff
+        # width = 80 * wdiff
+        # height = 25 * hdiff
+
+        # self.canvas = zooming.Zoom_Canvas( master = self.contentframe, 
+        #     oom = self.oom, width = width, height = height, 
+        #     background = self.canvasbackground, highlightthickness = 0 )
+
+        # self.canvas.grid( column = 1, row = 1, sticky = tk.N )
+
+
+        # self.canvas.bind( '<ButtonRelease-1>', self.stopdrawing )
+        # self.canvas.bind( '<Button-1>', self.callback )
+        # self.canvas.bind( '<B1-Motion>', self.callback )
+
+        # r = 2
+        # for w in range( wdiff//2, width, wdiff ):
+        #     for h in range( hdiff//2, height, hdiff ):
+        #         center = (w,h)
+        #         # bbox = (w + wdiff/3, h + hdiff/3, w + 2*wdiff/3, h + 2*hdiff/3)
+        #         self.canvas.create( shape = 'circle', center = center, radius = 2, 
+        #         fill = themes.canvas_fill, tags = 'dot', outline = self.canvasbackground)
+
+
+        # self.canvas.bind( '<Button-3>', self.getinfo )
 
 
 
-    def build_folders( self, level = None ):
-        folders = {'': ''}
-
-
-        for name, info in self.blueprints.items():
-            ancestors = info.ancestors
-            descendants = info.descendants
-
-            for ancestor in ancestors:
-                ancestorname = ancestor.name
-
-                if ancestorname == 'Object':
-                    continue
-                
-                parent = ancestors[ancestors.index( ancestor ) - 1].name
-
-                if parent == 'Object':
-                    parent = ''
-
-                if folders.get( ancestorname ) is None:
-                    folders[ancestorname] = self.tree.insert( folders[parent], 1, text = ancestorname )
-
-
-        self.tree.grid()
 
 
 
@@ -433,7 +378,7 @@ class Application( tk.Frame ):
         self.infobox.delete( 0, tk.END )
 
         o = self.get_qud_cell( event )
-        items = self.canvas.find_enclosed( **o )
+        items = self.canvas.find_enclosed( o )
 
         regex = re.compile( r'object=(.*)' )
 

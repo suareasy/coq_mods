@@ -1,5 +1,5 @@
 import hagadias.gameroot as hagadias
-import map_maker
+import app.mapmaker as mapmaker
 import sys
 import importlib
 import tkinter as tk
@@ -35,7 +35,7 @@ class dev( tk.Tk ):
 
     def reloadit( self ):
         print( 'reloading' )
-        importlib.reload( map_maker )
+        importlib.reload( mapmaker )
         children = [v for k, v in root.children.items()]
         for child in children:
             child.destroy()
@@ -50,9 +50,9 @@ root.configure( background = '#525252' )
 
 def main():
 
-    app = map_maker.Application( master = root, oom = orderofmagnitude )
+    app = mapmaker.Application( master = root, oom = orderofmagnitude )
     app.blueprints = qindex
-    app.create_menu_widgets()
+    app.create_widgets()
     # app.after( 10000, root.reloadit )
     app.mainloop()
 
